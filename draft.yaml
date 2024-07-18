@@ -1,0 +1,45 @@
+models:
+  Attraction:
+    name: json unique
+    slug: json unique
+    meta_title: json nullable
+    meta_desc: json nullable
+    google_maps_link: text nullable
+    google_maps_frame: text nullable
+    short_desc: json
+    desc: json
+    thumbnail: text
+    gallery: text
+    address: text
+    site_link: text nullable
+    phone: string nullable
+    email: string nullable
+    relationships:
+      belongsTo: User, City
+      belongsToMany: Category, Tag
+      hasMany: Social, Features
+
+  City:
+    name: string unique
+    relationships:
+      hasMany: Attraction
+
+  Category:
+    name: json unique
+    slug: json unique
+    thumbnail: text
+    relationships:
+      belongsToMany: Attraction
+
+  Tag:
+    name: json unique
+    slug: json unique
+    thumbnail: text
+    relationships:
+      belongsToMany: Attraction
+
+  Social:
+    name: text
+    link: text
+    relationships:
+      belongsTo: Attraction
