@@ -17,10 +17,12 @@
                 <x-nav.language-switcher class="absolute bottom-4 right-4 lg:hidden text-fontLight" />
             </nav>
         </div>
-        {{-- social & language-switcher --}}
-        <div class="flex justify-center items-center gap-12">
-            <x-social class="hidden lg:flex" />
+        {{-- social & language-switcher & theme-toggle --}}
+        <div class="flex justify-center items-center gap-6">
+           
             <x-nav.language-switcher class="hidden lg:flex" />
+            <x-nav.theme-toggler />
+
         </div>
         {{-- hamburger --}}
         <x-nav.hamburger />

@@ -8,11 +8,11 @@
     <a href="">
         <x-iconpark-instagram-o class="w-5 {{ $light ? 'text-white' : 'text-primary-400' }} hover:scale-105 duration-500" />
     </a>
-    <a href="">
+    {{-- <a href="">
         <x-iconpark-instagramone-o class="w-5 {{ $light ? 'text-white' : 'text-primary-400' }} hover:scale-105 duration-500" />
     </a>
     <a href="">
         <x-iconpark-youtube-o class="w-5 {{ $light ? 'text-white' : 'text-primary-400' }} hover:scale-105 duration-500" />
-    </a>
+    </a> --}}
 
 </div>

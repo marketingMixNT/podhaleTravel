@@ -2,7 +2,7 @@
 
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 
 <head>
     <meta charset="utf-8">
@@ -37,11 +37,13 @@
     @vite('resources/scss/app.scss')
 </head>
 
-<body class="relative bg-bgLight-300 font-text font-thin text-fontDark overflow-x-hidden">
+<body class="relative bg-bgLight-300 dark:bg-black font-text font-thin text-fontDark dark:text-fontLight overflow-x-hidden">
 
     <x-shared.header/>
 
 {{ $slot }}
+
+<x-shared.footer/>
 
 @vite('resources/js/app.js')
 </body>
