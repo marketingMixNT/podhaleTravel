@@ -50,34 +50,35 @@ class Tag extends Model
     {
         return [
             TextInput::make('name')
-                ->label('Tytuł')
+                ->label('Nazwa')
                 ->unique(ignoreRecord: true)
                 ->required()
                 ->minLength(3)
                 ->maxLength(255)
                 ->live(debounce: 1000)
+                ->placeholder('np. baseny')
                 ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+
             TextInput::make('slug')
-                ->readonly()
                 ->label('Slug')
+                ->readonly()
                 ->required()
                 ->minLength(3)
                 ->maxLength(255)
-                ->helperText('Przyjazny adres url który wygeneruje się automatycznie na podstawie nazwy apartamentu.'),
-            FileUpload::make('thumbnail')
+                ->placeholder('Przyjazny adres url który wygeneruje się automatycznie'),
 
+            FileUpload::make('thumbnail')
                 ->label('Miniaturka')
-                ->directory('category-images')
+                ->directory('tags-thumbnails')
                 ->getUploadedFileNameForStorageUsing(
-                    fn (TemporaryUploadedFile $file): string => 'category-images-' . now()->format('Ymd_His') . '.' . $file->getClientOriginalExtension()
+                    fn (TemporaryUploadedFile $file): string => 'tag-thumb' . now()->format('Ymd_His') . '.' . $file->getClientOriginalExtension()
                 )
                 ->image()
-                ->maxSize(4096)
+                ->maxSize(8192)
                 ->optimize('webp')
                 ->imageEditor()
                 ->imageEditorAspectRatios([
                     null,
-                    '16:9',
                     '4:3',
                     '1:1',
                 ])
@@ -86,5 +87,4 @@ class Tag extends Model
     }
 
     public $translatable = ['name', 'slug'];
-
 }
