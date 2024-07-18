@@ -1,0 +1,31 @@
+
+@mixin link-hover($color) {
+    position: relative;
+  
+    &::before {
+        content: "";
+        position: absolute;
+        width: 80%;
+        height: 1px;
+        border-radius: 4px;
+        bottom: 0;
+        left: 0;
+        transform-origin: right;
+        transform: scaleX(0);
+        transition: transform 0.6s ease-in-out;
+        background-color: $color;
+    }
+  
+    &:hover::before {
+        transform-origin: left;
+        transform: scaleX(1);
+    }
+  }
+  
+  .link-hover {
+    @include link-hover(#2f4571);
+  }
+  
+  .link-hover--light {
+    @include link-hover(white);
+  }

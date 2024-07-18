@@ -1,7 +1,9 @@
-<ul>
+@props(['class'=>''])
+
+<ul class="{{$class}} flex justify-center items-center gap-4">
     @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
         <li>
-            <a rel="alternate" hreflang="{{ $localeCode }}"
+            <a rel="alternate" hreflang="{{ $localeCode }}" class="link-hover"
                 href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                 {{ strtoupper($localeCode) }}
             </a>

@@ -8,8 +8,10 @@ use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Illuminate\Support\Facades\Blade;
+use Filament\Navigation\NavigationItem;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Support\Facades\FilamentView;
+use Filament\SpatieLaravelTranslatablePlugin;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
@@ -17,10 +19,9 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-
-use Filament\SpatieLaravelTranslatablePlugin;
 
 
 class AdminPanelProvider extends PanelProvider
@@ -45,6 +46,21 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 // Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
+            ])
+            ->navigationItems([
+                NavigationItem::make('Strona Główna')
+                    ->url('http://localhost:8000', shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-globe-alt'),
+                NavigationItem::make('Edytor zdjęć')
+                    ->url('https://www.iloveimg.com/', shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-scissors'),
+                NavigationItem::make('Chat GPT')
+                    ->url('https://chatgpt.com/', shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-cpu-chip'),
+                NavigationItem::make('Analityka')
+                    ->url('https://analytics.google.com/', shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-chart-pie'),
+
             ])
             ->middleware([
                 EncryptCookies::class,

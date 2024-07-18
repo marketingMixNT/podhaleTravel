@@ -39,6 +39,7 @@
 
 <body class="relative bg-bgLight-300 font-text font-thin text-fontDark overflow-x-hidden">
 
+    <x-shared.header/>
 
 {{ $slot }}
 
