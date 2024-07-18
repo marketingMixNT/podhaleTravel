@@ -37,7 +37,7 @@
     @vite('resources/scss/app.scss')
 </head>
 
-<body class="relative overflow-x-hidden">
+<body class="relative bg-bgLight-300 font-text font-thin text-fontDark overflow-x-hidden">
 
 
 {{ $slot }}

@@ -9,6 +9,10 @@ export default {
                 "3xl": "1919px",
                 max: "2200px",
             },
+            fontFamily: {
+                heading: ["IBM Plex Sans", "sans-serif"],
+                text: ["IBM Plex Sans", "sans-serif"],
+            },
             colors: {
                 primary: {
                     400: "#2f4571",
