@@ -50,38 +50,40 @@ class Category extends Model
     {
         return [
             TextInput::make('name')
-                ->label('Tytuł')
-                ->unique(ignoreRecord: true)
-                ->required()
-                ->minLength(3)
-                ->maxLength(255)
-                ->live(debounce: 1000)
-                ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
-            TextInput::make('slug')
-                ->readonly()
-                ->label('Slug')
-                ->required()
-                ->minLength(3)
-                ->maxLength(255)
-                ->helperText('Przyjazny adres url który wygeneruje się automatycznie na podstawie nazwy apartamentu.'),
-            FileUpload::make('thumbnail')
+            ->label('Nazwa')
+            ->unique(ignoreRecord: true)
+            ->required()
+            ->minLength(3)
+            ->maxLength(255)
+            ->live(debounce: 1000)
+            ->placeholder('np. sporty zimowe')
+            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
 
-                ->label('Miniaturka')
-                ->directory('category-images')
-                ->getUploadedFileNameForStorageUsing(
-                    fn (TemporaryUploadedFile $file): string => 'category-images-' . now()->format('Ymd_His') . '.' . $file->getClientOriginalExtension()
-                )
-                ->image()
-                ->maxSize(4096)
-                ->optimize('webp')
-                ->imageEditor()
-                ->imageEditorAspectRatios([
-                    null,
-                    '16:9',
-                    '4:3',
-                    '1:1',
-                ])
-                ->required(),
+        TextInput::make('slug')
+            ->label('Slug')
+            ->readonly()
+            ->required()
+            ->minLength(3)
+            ->maxLength(255)
+            ->placeholder('Przyjazny adres url który wygeneruje się automatycznie'),
+
+        FileUpload::make('thumbnail')
+            ->label('Miniaturka')
+            ->directory('category-thumbnails')
+            ->getUploadedFileNameForStorageUsing(
+                fn (TemporaryUploadedFile $file): string => 'category-thumb' . now()->format('Ymd_His') . '.' . $file->getClientOriginalExtension()
+            )
+            ->image()
+            ->maxSize(8192)
+            ->optimize('webp')
+            ->imageEditor()
+            ->imageEditorAspectRatios([
+                null,
+                '16:9',
+                '4:3',
+                '1:1',
+            ])
+            ->required(),
         ];
     }
 
