@@ -38,8 +38,11 @@ class City extends Model
         return [ 
             TextInput::make('name')
                 ->label('Miejscowość')
-                ->placeholder('Nowy Targ')
+                ->unique(ignoreRecord: true)
                 ->required()
+                ->minLength(3)
+                ->maxLength(255)
+                ->placeholder('np. Nowy Targ')
             ];
     }
 }

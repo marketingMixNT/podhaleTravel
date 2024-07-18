@@ -41,8 +41,9 @@ class CategoryResource extends Resource
                 ->label('Miniaturka'),
 
                 Tables\Columns\TextColumn::make('name')
-                    ->label('nazwa')
-                    ->searchable(),
+                    ->label('Nazwa')
+                    ->searchable()
+                    ->sortable(),
                     
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Data publikacji')
