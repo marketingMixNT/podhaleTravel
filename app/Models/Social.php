@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Filament\Forms\Components\Component;
+use Livewire\Component as Livewire;
 use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
+
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -42,18 +45,35 @@ class Social extends Model
     {
         return [
             Select::make('name')
-            ->disableOptionsWhenSelectedInSiblingRepeaterItems() 
-            ->live()
+                ->label('Platforma')
+                ->disableOptionsWhenSelectedInSiblingRepeaterItems()
+                ->live()
+                ->searchable()
+                ->preload()
                 ->options([
                     'facebook' => 'Facebook',
                     'instagram' => 'Instagram',
+                    'twitter' => 'X/Twitter',
                     'tiktok' => 'TikTok',
+                    'youtube' => 'YouTube',
+                    'linkedin' => 'LinkedIn',
+                    'tripadvisor' => 'TripAdvisor',
+                    'booking' => 'Booking',
                 ]),
+
+
             TextInput::make('link')
                 ->label('Link')
+                ->minLength(3)
                 ->url()
-
-
+                ->live(debounce: 1000)
+                ->afterStateUpdated(function (Livewire $livewire, Component $component) {
+                    $validate = $livewire->validateOnly($component->getStatePath());
+                    $component
+                        ->hintIcon('heroicon-m-check-circle')
+                        ->hintColor('success');
+                })
+                ->placeholder('np. https://www.instagram.com/marketingmix_pl/')
         ];
     }
 }
