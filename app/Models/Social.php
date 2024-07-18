@@ -46,6 +46,7 @@ class Social extends Model
         return [
             Select::make('name')
                 ->label('Platforma')
+                ->required()
                 ->disableOptionsWhenSelectedInSiblingRepeaterItems()
                 ->live()
                 ->searchable()
@@ -64,6 +65,7 @@ class Social extends Model
 
             TextInput::make('link')
                 ->label('Link')
+                ->required()
                 ->minLength(3)
                 ->url()
                 ->live(debounce: 1000)

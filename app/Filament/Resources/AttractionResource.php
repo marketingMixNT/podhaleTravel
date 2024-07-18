@@ -31,6 +31,9 @@ use App\Models\City;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Schmeits\FilamentCharacterCounter\Forms\Components\TextInput;
 
+use Filament\Forms\Components\Component;
+use Livewire\Component as Livewire;
+
 
 class AttractionResource extends Resource
 {
@@ -43,23 +46,23 @@ class AttractionResource extends Resource
 
     protected static ?string $model = Attraction::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-sparkles';
+
+    protected static ?string $navigationGroup = 'Główne';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-
                 // SEO
                 Section::make('SEO')
                     ->icon('heroicon-o-globe-alt')
                     ->collapsible()
                     ->collapsed()
-                    ->description('Wprowadź meta title (krótki, opisowy tytuł strony) oraz meta description (krótki opis strony widoczny w wynikach wyszukiwarek), które informują użytkowników o treści strony.')
+                    ->description('Wprowadź meta title oraz meta description , które informują użytkowników o treści strony.')
                     ->schema([
-
                         Shout::make('info')
-                            ->content('Title i Desc zostana uzupelnione automatycznie jezeli ich nie podasz, zachecamy jednak do zrobienia tego rezcznie w celu lepszej optymalizacji')
+                            ->content('Tytuł oraz opis zostaną uzupełnione automatycznie jezeli ich nie podasz. Zachecamy jednak do zrobienia tego w celu lepszej optymalizacji')
                             ->type('info'),
 
                         TextInput::make('meta_title')
@@ -68,14 +71,22 @@ class AttractionResource extends Resource
                             ->characterLimit(60)
                             ->minLength(10)
                             ->maxLength(75)
+                            ->live(debounce: 1000)
+                            ->afterStateUpdated(function (Livewire $livewire, Component $component) {
+                                $validate = $livewire->validateOnly($component->getStatePath());
+                            })
                             ->columnSpanFull(),
 
                         TextInput::make('meta_desc')
                             ->label('Opis Meta')
-                            ->placeholder('Meta description to krótki opis strony internetowej wyświetlany w wynikach wyszukiwarek, który informuje użytkowników o jej treści.')
+                            ->placeholder('Meta description to krótki opis strony internetowej wyświetlany w wynikach wyszukiwarek.')
                             ->characterLimit(160)
                             ->minLength(10)
                             ->maxLength(180)
+                            ->live(debounce: 1000)
+                            ->afterStateUpdated(function (Livewire $livewire, Component $component) {
+                                $validate = $livewire->validateOnly($component->getStatePath());
+                            })
                             ->columnSpanFull(),
                     ]),
 
@@ -85,7 +96,7 @@ class AttractionResource extends Resource
                     ->columns(2)
                     ->collapsible()
                     ->collapsed()
-                    ->description('Podaj nazwę atrakcji, kluczowe informacje')
+                    ->description('Podaj nazwę atrakcji, dane kontaktowe oraz podaj social media')
                     ->schema([
 
                         Forms\Components\TextInput::make('name')
@@ -103,23 +114,35 @@ class AttractionResource extends Resource
                             ->placeholder('Przyjazny adres url który wygeneruje się automatycznie')
                             ->readOnly(),
 
-                        Fieldset::make('Info')
+                        Fieldset::make('Dane kontaktowe')
                             ->schema([
 
                                 Forms\Components\TextInput::make('phone')
                                     ->label('Telefon')
                                     ->prefix('+48')
+                                    ->integer()
                                     ->columns(1),
 
                                 Forms\Components\TextInput::make('email')
                                     ->label('Email')
                                     ->email()
+                                    ->live(debounce: 1000)
+                                    ->afterStateUpdated(function (Livewire $livewire, Component $component) {
+                                        $validate = $livewire->validateOnly($component->getStatePath());
+                                        $component
+                                            ->hintIcon('heroicon-m-check-circle')
+                                            ->hintColor('success');
+                                    })
                                     ->columns(1),
 
                                 Forms\Components\TextInput::make('site_link')
                                     ->label('Link do strony atrakcji')
                                     ->url()
-                                    ->required()
+                                    ->minLength(3)
+                                    ->live(debounce: 1000)
+                                    ->afterStateUpdated(function (Livewire $livewire, Component $component) {
+                                        $validate = $livewire->validateOnly($component->getStatePath());
+                                    })
                                     ->columnSpanFull(),
 
                                 Repeater::make('socials')
@@ -140,30 +163,28 @@ class AttractionResource extends Resource
 
                 //CATEGORIES & TAGS
                 Section::make('Kategorie i tagi')
-                    ->icon('heroicon-o-pencil-square')
+                    ->icon('heroicon-o-tag')
                     ->columns(2)
                     ->collapsible()
                     ->collapsed()
-                    ->description('Kategorie i tagi')
+                    ->description('Wybierz kategorie oraz tagi pasujące do atrakcji')
                     ->schema([
                         Forms\Components\Select::make('category_id')
-                            ->placeholder('Mozesz wybrac kilka')
+                            ->label('Kategoria')
+                            ->relationship('categories', 'name')
                             ->multiple()
+                            ->preload()
                             ->searchable()
                             ->createOptionForm(Category::getForm())
-                            ->preload()
-                            ->relationship('categories', 'name')
-                            ->preload()
-                            ->label('Kategoria'),
+                            ->placeholder('Mozesz wybrac kilka'),
                         Forms\Components\Select::make('tag_id')
-                            ->placeholder('Mozesz wybrac kilka')
+                            ->label('Tagi')
+                            ->relationship('tags', 'name')
                             ->multiple()
                             ->searchable()
+                            ->preload()
                             ->createOptionForm(Tag::getForm())
-                            ->preload()
-                            ->relationship('tags', 'name')
-                            ->preload()
-                            ->label('Tagi')
+                            ->placeholder('Mozesz wybrac kilka')
                     ]),
 
                 //ADDRESS
@@ -172,39 +193,35 @@ class AttractionResource extends Resource
                     ->columns(2)
                     ->collapsible()
                     ->collapsed()
-                    ->description('Podaj adres oraz link do mapy google')
+                    ->description('Podaj adres atrakcji oraz dodaj mapę google')
                     ->schema([
                         Forms\Components\TextInput::make('address')
                             ->label('Adres')
-                            ->placeholder('np. Skólavörðustígur 101, Reykjavík, Iceland')
                             ->required()
+                            ->minLength(3)
+                            ->maxLength(255)
+                            ->placeholder('np. Ludźmierska 26A')
                             ->columns(1),
-                        // Forms\Components\TextInput::make('city')
-                        //     ->label('Miejscowość')
-                        //     ->placeholder('Nowy Targ')
-                        //     ->required()
-                        //     ->columns(1),
 
-                            Forms\Components\Select::make('city_id')
-                            ->placeholder('Mozesz wybrac kilka')
-                            
-                            ->searchable()
-                            ->createOptionForm(City::getForm())
-                            ->editOptionForm(City::getForm())
-                            ->preload()
+                        Forms\Components\Select::make('city_id')
+                            ->label('Miejscowość')
                             ->relationship('city', 'name')
-                           
-                            ->label('Miejscowość'),
-
+                            ->required()
+                            ->searchable()
+                            ->preload()
+                            ->createOptionForm(City::getForm())
+                            ->editOptionForm(City::getForm()),
 
                         Forms\Components\TextInput::make('google_maps_link')
-                            ->label('Link do mapy google')
+                            ->label('Link do Google Maps')
                             ->placeholder('np. https://maps.app.goo.gl/6mVWwduHMxm2pEKP8')
                             ->url()
                             ->columnSpanFull(),
                         Forms\Components\Textarea::make('google_maps_frame')
-                            ->label('Link do mapy google')
-                            ->placeholder('np. https://maps.app.goo.gl/6mVWwduHMxm2pEKP8')
+                            ->label('Google Maps iFrame')
+                            ->placeholder('wklej tutaj iframe z mapą google')
+                            ->autosize()
+                            ->hint('W celu poprawy optymalizacji dodaj tag name="nazwaAtrakcji')
                             ->columnSpanFull(),
                     ]),
 
@@ -214,7 +231,7 @@ class AttractionResource extends Resource
                     ->columns(2)
                     ->collapsible()
                     ->collapsed()
-                    ->description('Treści na stronę apartamentu')
+                    ->description('Wprowadź treści na stronę atrakcji')
                     ->schema([
                         Forms\Components\RichEditor::make('short_desc')
                             ->label('Krótki opis')
@@ -244,16 +261,16 @@ class AttractionResource extends Resource
                     ->columns(2)
                     ->collapsible()
                     ->collapsed()
-                    ->description('Dodaj zdjęcie oraz galerię')
+                    ->description('Dodaj miniaturkę która będzie zdjęciem górnym oraz galerię')
                     ->schema([
                         Forms\Components\FileUpload::make('thumbnail')
                             ->label('Miniaturka')
-                            ->directory('apartments-thumbnails')
+                            ->directory('attraction-thumbnails')
                             ->getUploadedFileNameForStorageUsing(
-                                fn (TemporaryUploadedFile $file): string => 'apartament' . now()->format('H-i-s') . '-' . str_replace([' ', '.'], '', microtime()) . '.' . $file->getClientOriginalExtension()
+                                fn (TemporaryUploadedFile $file): string => 'atrakcja-miniaturka' . now()->format('Ymd_His') . '.' . $file->getClientOriginalExtension()
                             )
                             ->image()
-                            ->maxSize(4096)
+                            ->maxSize(8192)
                             ->optimize('webp')
                             ->imageEditor()
                             ->imageEditorAspectRatios([
@@ -268,14 +285,16 @@ class AttractionResource extends Resource
                             ->label('Galeria')
                             ->directory('apartments-galleries')
                             ->getUploadedFileNameForStorageUsing(
-                                fn (TemporaryUploadedFile $file): string => 'galeria' . now()->format('H-i-s') . '-' . str_replace([' ', '.'], '', microtime()) . '.' . $file->getClientOriginalExtension()
+                                fn (TemporaryUploadedFile $file): string => 'atrakcja-galeria' . now()->format('Ymd_His') . '.' . $file->getClientOriginalExtension()
                             )
                             ->multiple()
                             ->appendFiles()
                             ->image()
-                            ->maxSize(4096)
+                            ->maxSize(8192)
                             ->optimize('webp')
                             ->imageEditor()
+                            ->minFiles(3)
+                            ->maxFiles(12)
                             ->imageEditorAspectRatios([
                                 null,
                                 '16:9',
@@ -283,15 +302,16 @@ class AttractionResource extends Resource
                                 '1:1',
                             ])
                             ->required()
+
                             ->columnSpanFull(),
                     ]),
-
 
                 Forms\Components\TextInput::make('user_id')
                     ->required()
                     ->default(
                         Filament::auth()->id()
-                    )->readOnly()->hidden()
+                    )->readOnly()
+                    ->hidden()
             ]);
     }
 
@@ -302,35 +322,31 @@ class AttractionResource extends Resource
             ->columns([
 
                 Tables\Columns\ImageColumn::make('thumbnail')
-                ->label('Miniaturka'),
+                    ->label('Miniaturka'),
 
                 Tables\Columns\TextColumn::make('name')
-                ->label('Nazwa')
-                ->description(function (Attraction $record) {
-                    return Str::limit(strip_tags($record->short_desc), 40);
-                })
-                ->searchable()
-                ->sortable(),
+                    ->label('Nazwa')
+                    ->description(function (Attraction $record) {
+                        return Str::limit(strip_tags($record->short_desc), 40);
+                    })
+                    ->searchable()
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('categories.name')
-                ->label('Kategorie')
-                ->badge()
-                ->toggleable(isToggledHiddenByDefault: true)
-                
-                
-                ,
+                    ->label('Kategorie')
+                    ->badge()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('tags.name')
-                ->label('Tagi')
-                ->badge()
-            
-                ->toggleable(isToggledHiddenByDefault: true)
-               ,
+                    ->label('Tagi')
+                    ->badge()
 
-                Tables\Columns\TextColumn::make('city')
-                ->label('Miejscowość')
-                ->searchable(),
-              
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                Tables\Columns\TextColumn::make('city.name')
+                    ->label('Miejscowość')
+                    ->searchable(),
+
 
                 Tables\Columns\TextColumn::make('user_id')
                     ->label('Autor')
@@ -379,5 +395,19 @@ class AttractionResource extends Resource
             'create' => Pages\CreateAttraction::route('/create'),
             'edit' => Pages\EditAttraction::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return ('Atrakcje');
+    }
+    public static function getPluralLabel(): string
+    {
+        return ('Atrakcje');
+    }
+
+    public static function getLabel(): string
+    {
+        return ('Atrakcje');
     }
 }
