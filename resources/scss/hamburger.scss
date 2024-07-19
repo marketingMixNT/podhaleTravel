@@ -29,7 +29,7 @@
 .hamburger.is-active .hamburger-inner,
 .hamburger.is-active .hamburger-inner::before,
 .hamburger.is-active .hamburger-inner::after {
-    @apply bg-primary-400
+    @apply bg-primary-400 dark:bg-bgLight-200
 }
 
 .hamburger-box {
@@ -54,7 +54,7 @@
     transition-property: transform;
     transition-duration: 0.15s;
     transition-timing-function: ease;
-    @apply bg-primary-400
+    @apply bg-primary-400 dark:bg-bgLight-200
 }
 .hamburger-inner::before,
 .hamburger-inner::after {

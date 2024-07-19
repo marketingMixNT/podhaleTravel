@@ -1,13 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: 'selector',
+    darkMode: "selector",
     content: ["./resources/**/*.blade.php"],
     theme: {
         extend: {
             screens: {
                 xxs: "390px",
                 xs: "450px",
-                "3xl": "1919px",
                 max: "2200px",
             },
             fontFamily: {
@@ -28,10 +27,15 @@ export default {
 
                 bgLight: {
                     200: "#ffffff",
-                    300: "#fafafa",
-                    400: "#dfe2e4",
-                    500: "#d1d4d6",
-                    600: "#cfd3d6",
+                    400: "#fafafa",
+                    600: "#dfe2e4",
+                    800: "#d1d4d6",
+                },
+                bgDark: {
+                    200: "",
+                    400: "",
+                    600: "",
+                    800: "#000000",
                 },
             },
         },

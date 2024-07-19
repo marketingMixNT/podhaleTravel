@@ -5,47 +5,26 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="application-name" content="{{ config('app.name') }}">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="">
-
-    {{-- No Follow --}}
-    @if ($noFollow)
-        <meta name="robots" content="noindex, nofollow">
-    @endisset
-
-    <!--Title-->
-    <title>{{ isset($title) ? $title : '' }} - PodhaleTravel</title>
-    <meta name="description" content="{{ isset($description) ? $description : '' }}">
-
-
-    <!--Cannonical-->
-    <link rel="canonical" href="{{ url()->current() }}" />
-
+    <!--Meta-->
+    @include('partials.meta')
     <!--Favicon-->
     @include('partials.favicon')
-
     <!--Fonts-->
     @include('partials.fonts')
-
-    <!--Facebook-->
-    @include('partials.facebook')
-
 
     @vite('resources/scss/app.scss')
 </head>
 
-<body class="relative bg-bgLight-300 dark:bg-black font-text font-thin text-fontDark dark:text-fontLight overflow-x-hidden">
+<body
+    class="relative bg-bgLight-400 dark:bg-bgDark-800 font-text font-light text-fontDark dark:text-fontLight overflow-x-hidden">
 
-    <x-shared.header/>
+    <x-shared.header />
 
-{{ $slot }}
+    {{ $slot }}
 
-<x-shared.footer/>
+    <x-shared.footer />
 
-@vite('resources/js/app.js')
+    @vite('resources/js/app.js')
 </body>
 
 </html>

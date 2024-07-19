@@ -1,31 +1,18 @@
 
-@mixin link-hover($color) {
-    position: relative;
-  
-    &::before {
-        content: "";
-        position: absolute;
-        width: 80%;
-        height: 1px;
-        border-radius: 4px;
-        bottom: 0;
-        left: 0;
-        transform-origin: right;
-        transform: scaleX(0);
-        transition: transform 0.6s ease-in-out;
-        background-color: $color;
-    }
-  
-    &:hover::before {
-        transform-origin: left;
-        transform: scaleX(1);
-    }
-  }
-  
-  .link-hover {
-    @include link-hover(#2f4571);
-  }
-  
-  .link-hover--light {
-    @include link-hover(white);
-  }
+.link-hover{
+  @apply relative w-fit block after:block after:content-[''] after:absolute after:h-[1px] after:bg-primary-400 dark:after:bg-bgLight-200 after:w-[75%] after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left;
+}
+
+.link-hover--nav{
+  @apply relative w-fit block after:block after:content-[''] after:absolute after:h-[1px] after:bg-bgLight-200 lg:after:bg-primary-400 lg:dark:after:bg-bgLight-200 after:w-[75%] after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left;
+}
+
+.link-hover--light{
+  @apply relative  w-fit block after:block after:content-[''] after:absolute after:h-[1px] after:bg-bgLight-200 dark:after:bg-primary-400 after:w-[75%] after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left
+}
+
+
+
+.scale-hover{
+  @apply hover:scale-110 duration-500
+}
