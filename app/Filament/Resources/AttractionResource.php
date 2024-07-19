@@ -4,35 +4,36 @@ namespace App\Filament\Resources;
 
 use App\Models\Tag;
 use Filament\Forms;
+use App\Models\City;
 use App\Models\User;
 use Filament\Tables;
 use App\Models\Social;
 use Filament\Forms\Set;
+
 use App\Models\Category;
-
 use Filament\Forms\Form;
-use App\Models\Attraction;
 
+use App\Models\Attraction;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Facades\Filament;
 use Illuminate\Support\Carbon;
 use Filament\Resources\Resource;
 use Awcodes\Shout\Components\Shout;
+use Livewire\Component as Livewire;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Component;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Resources\Concerns\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\AttractionResource\Pages;
+
 use App\Filament\Resources\AttractionResource\RelationManagers;
-use App\Models\City;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Schmeits\FilamentCharacterCounter\Forms\Components\TextInput;
-
-use Filament\Forms\Components\Component;
-use Livewire\Component as Livewire;
 
 
 class AttractionResource extends Resource
@@ -306,6 +307,8 @@ class AttractionResource extends Resource
                             ->columnSpanFull(),
                     ]),
 
+                Toggle::make('featured')->label('Polecany')->onIcon('heroicon-o-star'),
+
                 Forms\Components\TextInput::make('user_id')
                     ->required()
                     ->default(
@@ -331,6 +334,8 @@ class AttractionResource extends Resource
                     })
                     ->searchable()
                     ->sortable(),
+
+                Tables\Columns\IconColumn::make('featured')->sortable(),
 
                 Tables\Columns\TextColumn::make('categories.name')
                     ->label('Kategorie')

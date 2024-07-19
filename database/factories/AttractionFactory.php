@@ -37,6 +37,7 @@ class AttractionFactory extends Factory
             'site_link' => $this->faker->text(),
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->safeEmail(),
+            'featured' => $this->faker->boolean(),
             'user_id' => User::factory(),
             'city_id' => City::factory(),
         ];

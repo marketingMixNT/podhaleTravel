@@ -36,6 +36,7 @@ class Attraction extends Model
         'site_link',
         'phone',
         'email',
+        'featured',
         'user_id',
         'city_id',
     ];
@@ -54,6 +55,7 @@ class Attraction extends Model
         'short_desc' => 'array',
         'desc' => 'array',
         'gallery' => 'array',
+        'featured' => 'boolean',
         'user_id' => 'integer',
         'city_id' => 'integer',
     ];

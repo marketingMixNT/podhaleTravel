@@ -4,13 +4,13 @@ created:
     - database/factories/CategoryFactory.php
     - database/factories/TagFactory.php
     - database/factories/SocialFactory.php
-    - database/migrations/2024_07_18_103951_create_attractions_table.php
-    - database/migrations/2024_07_18_103952_create_cities_table.php
-    - database/migrations/2024_07_18_103953_create_categories_table.php
-    - database/migrations/2024_07_18_103954_create_tags_table.php
-    - database/migrations/2024_07_18_103955_create_socials_table.php
-    - database/migrations/2024_07_18_103956_create_attraction_category_table.php
-    - database/migrations/2024_07_18_103957_create_attraction_tag_table.php
+    - database/migrations/2024_07_19_080012_create_attractions_table.php
+    - database/migrations/2024_07_19_080013_create_cities_table.php
+    - database/migrations/2024_07_19_080014_create_categories_table.php
+    - database/migrations/2024_07_19_080015_create_tags_table.php
+    - database/migrations/2024_07_19_080016_create_socials_table.php
+    - database/migrations/2024_07_19_080017_create_attraction_category_table.php
+    - database/migrations/2024_07_19_080018_create_attraction_tag_table.php
     - app/Models/Attraction.php
     - app/Models/City.php
     - app/Models/Category.php
@@ -18,7 +18,7 @@ created:
     - app/Models/Social.php
 models:
     User: { name: string, email: string, email_verified_at: 'timestamp nullable default:NULL', password: string, remember_token: 'string:100 nullable default:NULL' }
-    Attraction: { name: 'json unique', slug: 'json unique', meta_title: 'json nullable', meta_desc: 'json nullable', google_maps_link: 'text nullable', google_maps_frame: 'text nullable', short_desc: json, desc: json, thumbnail: text, gallery: text, address: text, site_link: 'text nullable', phone: 'string nullable', email: 'string nullable', relationships: { belongsTo: 'User, City', belongsToMany: 'Category, Tag', hasMany: 'Social, Features' } }
+    Attraction: { name: 'json unique', slug: 'json unique', meta_title: 'json nullable', meta_desc: 'json nullable', google_maps_link: 'text nullable', google_maps_frame: 'text nullable', short_desc: json, desc: json, thumbnail: text, gallery: text, address: text, site_link: 'text nullable', phone: 'string nullable', email: 'string nullable', featured: boolean, relationships: { belongsTo: 'User, City', belongsToMany: 'Category, Tag', hasMany: 'Social, Features' } }
     City: { name: 'string unique', relationships: { hasMany: Attraction } }
     Category: { name: 'json unique', slug: 'json unique', thumbnail: text, relationships: { belongsToMany: Attraction } }
     Tag: { name: 'json unique', slug: 'json unique', thumbnail: text, relationships: { belongsToMany: Attraction } }

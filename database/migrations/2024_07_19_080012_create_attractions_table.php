@@ -27,6 +27,7 @@ return new class extends Migration
             $table->text('site_link')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
+            $table->boolean('featured')->default(false);
             $table->foreignId('user_id');
             $table->foreignId('city_id');
             $table->timestamps();

@@ -14,6 +14,7 @@ models:
     site_link: text nullable
     phone: string nullable
     email: string nullable
+    featured: boolean
     relationships:
       belongsTo: User, City
       belongsToMany: Category, Tag
@@ -43,3 +44,4 @@ models:
     link: text
     relationships:
       belongsTo: Attraction
+
