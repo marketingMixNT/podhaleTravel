@@ -307,7 +307,7 @@ class AttractionResource extends Resource
                             ->columnSpanFull(),
                     ]),
 
-                Toggle::make('featured')->label('Polecany')->onIcon('heroicon-o-star'),
+                Toggle::make('featured')->label('Polecana')->onIcon('heroicon-o-star'),
 
                 Forms\Components\TextInput::make('user_id')
                     ->required()
@@ -335,7 +335,7 @@ class AttractionResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                Tables\Columns\IconColumn::make('featured')->sortable(),
+                Tables\Columns\IconColumn::make('featured')->label('Polecana')->sortable(),
 
                 Tables\Columns\TextColumn::make('categories.name')
                     ->label('Kategorie')

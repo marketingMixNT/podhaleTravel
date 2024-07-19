@@ -85,6 +85,11 @@ class Attraction extends Model
         return $this->hasMany(Social::class);
     }
 
+    public function getThumbnailUrl() :string
+    {
+        return  asset('storage/' . $this->thumbnail);
+    }
+
     public $translatable = ['name', 'slug','meta_title','meta_desc','short_desc','desc'];
 
 }

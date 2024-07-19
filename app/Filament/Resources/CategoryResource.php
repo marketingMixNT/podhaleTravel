@@ -18,9 +18,19 @@ use App\Filament\Resources\CategoryResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Filament\Resources\Concerns\Translatable;
+
 
 class CategoryResource extends Resource
 {
+
+    use Translatable;
+
+    public static function getTranslatableLocales(): array
+    {
+        return ['pl', 'en'];
+    }
+    
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';

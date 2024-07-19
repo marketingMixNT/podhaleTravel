@@ -12,7 +12,8 @@
     <!--Fonts-->
     @include('partials.fonts')
 
-    @vite('resources/scss/app.scss')
+    @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+    
 </head>
 
 <body
@@ -24,7 +25,10 @@
 
     <x-shared.footer />
 
-    @vite('resources/js/app.js')
+    
+  
+
+   
 </body>
 
 </html>

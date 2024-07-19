@@ -14,8 +14,18 @@ use App\Filament\Resources\TagResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TagResource\RelationManagers;
 
+use Filament\Resources\Concerns\Translatable;
+
+
 class TagResource extends Resource
 {
+
+    use Translatable;
+
+    public static function getTranslatableLocales(): array
+    {
+        return ['pl', 'en'];
+    }
     protected static ?string $model = Tag::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';

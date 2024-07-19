@@ -1,6 +1,6 @@
 <x-layouts.app title="" description="">
 
-<p>test</p>
+<livewire:attraction-list/>
 
 
 </x-layouts.app>
