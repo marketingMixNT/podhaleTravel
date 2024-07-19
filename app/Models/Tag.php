@@ -86,5 +86,12 @@ class Tag extends Model
         ];
     }
 
+    public function getFormatName()
+    {
+        $formatName = strtolower($this->name);
+        $formatName = ucfirst($formatName);
+        return $formatName;
+    }
+
     public $translatable = ['name', 'slug'];
 }

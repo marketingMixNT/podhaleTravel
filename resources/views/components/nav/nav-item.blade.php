@@ -9,5 +9,5 @@
 
 
 
-<li class=" {{ $class }} link-hover--nav  "><a href="{{ $href }}">{{ $slot }}</a>
+<li class=" {{ $class }} link-hover--nav  "><a wire:navigate href="{{ $href }}">{{ $slot }}</a>
 </li>

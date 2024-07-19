@@ -1,0 +1,7 @@
+//CATEGORIES
+.active{
+    @apply bg-bgDark-800 dark:bg-bgDark-400 text-fontLight  border-none hover:bg-bgDark-800 dark:hover:bg-bgDark-600
+}
+.inactive{
+    @apply bg-bgLight-200 border border-fontDark hover:bg-bgLight-400 dark:text-fontDark
+}

@@ -7,3 +7,6 @@ import "./partials/footerYear";
 document.addEventListener("livewire:navigated", () => {
     initFlowbite();
 });
+
+
+

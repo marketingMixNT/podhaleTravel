@@ -37,6 +37,7 @@ class Attraction extends Model
         'phone',
         'email',
         'featured',
+        'order',
         'user_id',
         'city_id',
     ];

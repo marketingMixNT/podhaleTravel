@@ -321,7 +321,8 @@ class AttractionResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultSort('created_at', 'desc')
+            ->reorderable('order')
+            ->defaultSort('order', 'asc')
             ->columns([
 
                 Tables\Columns\ImageColumn::make('thumbnail')

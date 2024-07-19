@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use Illuminate\Support\Facades\Cache;
+
 use App\Models\Tag;
 use App\Models\City;
 use Livewire\Component;
@@ -29,12 +31,12 @@ class AttractionList extends Component
     #[Url]
     public $search;
 
- 
+
 
     #[Computed]
     public function getAttractionsProperty()
     {
-        return Attraction::with('categories', 'tags','city')
+        return Attraction::with(['categories', 'tags', 'city'])
 
             ->when($this->category, function ($query) {
                 $query->whereHas('categories', function ($query) {
@@ -47,19 +49,21 @@ class AttractionList extends Component
                 });
             })
             ->when($this->city, function ($query) {
-                $query->where('city_id', $this->city);
+                $query->whereHas('city', function ($query) {
+                    $query->whereJsonContains('slug', [$this->getCurrentLocale() => $this->city]);
+                });
             })
-            
-            ->whereRaw('LOWER(name) like ?', ["%" . strtolower($this->search) . "%"])
-            
 
-            ->paginate(5);
+            ->whereRaw('LOWER(name) like ?', ["%" . strtolower($this->search) . "%"])
+
+
+            ->orderBy('order', 'desc')->paginate(5);
     }
 
     #[Computed]
     public function getCategoriesProperty()
     {
-        return Category::all();
+        return Category::where('type', 'attractions')->get();
     }
 
     #[Computed]
@@ -73,6 +77,31 @@ class AttractionList extends Component
         return City::all();
     }
 
+    // #[Computed]
+    // public function getCategoriesProperty()
+    // {
+    //     return Cache::remember('categories', now()->addMinute(), function () {
+    //         return Category::where('type', 'attractions')->get();
+    //     });
+    // }
+
+    // #[Computed]
+    // public function getTagsProperty()
+    // {
+    //     return Cache::remember('tags', now()->addHours(1), function () {
+    //         return Tag::all();
+    //     });
+    // }
+
+    // #[Computed]
+    // public function getCitiesProperty()
+    // {
+    //     return Cache::remember('cities', now()->addHours(1), function () {
+    //         return City::all();
+    //     });
+    // }
+
+
     #[Url]
     public function setCategory($slug)
     {
@@ -80,6 +109,8 @@ class AttractionList extends Component
         $this->resetPage();
         $this->emitSelf('refreshComponent');
     }
+
+
 
     #[Url]
     public function setTag($slug)
@@ -89,9 +120,9 @@ class AttractionList extends Component
         $this->emitSelf('refreshComponent');
     }
     #[Url]
-    public function setCity($id)
+    public function setCity($slug)
     {
-        $this->city = $id;
+        $this->city = $slug;
         $this->resetPage();
         $this->emitSelf('refreshComponent');
     }
@@ -100,15 +131,4 @@ class AttractionList extends Component
     {
         return app()->getLocale();
     }
-
- 
-
-    // public function render()
-    // {
-    //     return view('livewire.attraction-list',[
-    //         'attractions' => $this->attractions,
-    //         'categories' => $this->categories,
-    //         'tags' => $this->tags
-    //     ]);
-    // }
 }

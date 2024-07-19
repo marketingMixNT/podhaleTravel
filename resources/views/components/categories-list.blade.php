@@ -1,12 +1,13 @@
+{{-- style of active and inactive in global.scss --}}
 @props(['categories'])
 
-<ul class="flex justify-center items-center gap-6 flex-wrap">
+<ul class="flex flex-wrap justify-center items-center gap-6 ">
 
-    <x-base.link-btn wire:navigate type="third" href="{{ route('attraction.index') }}" wire:key="all"
-        class="{{ $this->category === '' ? 'bg-primary-400 text-white border-none hover:bg-primary-400 ' : 'bg-white border border-black hover:bg-gray-100' }}">Wszystkie</x-base.link-btn>
+    <x-base.badge type='large' wire:navigate href="{{ route('attraction.index') }}" 
+        class="{{ $this->category === '' ? 'active' : 'inactive' }}">Wszystkie</x-base.badge>
     @foreach ($categories as $category)
-        <x-base.link-btn wire:navigate type="third"
-            href="{{ route('attraction.index', ['category' => $category->slug]) }}" wire:key="{{ $category->slug }}"
-            class="{{ $category->slug === $this->category ? 'bg-primary-400 text-white border-none hover:bg-primary-400 ' : ' bg-white border border-black hover:bg-gray-100' }}">{{ $category->name }}</x-base.link-btn>
+        <x-base.badge type='large' wire:navigate href="{{ route('attraction.index', ['category' => $category->slug]) }}"
+            wire:key="{{ $category->slug }}"
+            class="{{ $category->slug === $this->category ? 'active' : 'inactive' }}">{{  $category->getFormatName()}}</x-base.badge>
     @endforeach
 </ul>

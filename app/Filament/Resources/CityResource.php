@@ -13,9 +13,18 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\CityResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CityResource\RelationManagers;
+use Filament\Resources\Concerns\Translatable;
+
 
 class CityResource extends Resource
 {
+
+    use Translatable;
+
+    public static function getTranslatableLocales(): array
+    {
+        return ['pl', 'en'];
+    }
     protected static ?string $model = City::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-home-modern';

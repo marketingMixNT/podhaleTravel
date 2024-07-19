@@ -15,19 +15,23 @@ models:
     phone: string nullable
     email: string nullable
     featured: boolean
+    order: integer nullable
+
     relationships:
       belongsTo: User, City
       belongsToMany: Category, Tag
-      hasMany: Social, Features
+      hasMany: Social
 
   City:
-    name: string unique
+    name: json unique
+    slug: json unique
     relationships:
       hasMany: Attraction
 
   Category:
     name: json unique
     slug: json unique
+    type: string
     thumbnail: text
     relationships:
       belongsToMany: Attraction

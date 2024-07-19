@@ -1,5 +1,9 @@
 <x-layouts.app title="" description="">
 
-<h1 class="text-2xl text-red-500">test</h1>
+    <x-base.heading-secondary heading="Strona Główna" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam, illo." />
+
+    <main>
+        <livewire:home/>
+    </main>
 
 </x-layouts.app>

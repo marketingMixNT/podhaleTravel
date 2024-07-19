@@ -18,4 +18,5 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
 
     Route::get('/', HomeController::class)->name('home');
     Route::get('/atrakcje', [AttractionController::class, 'index'])->name('attraction.index');
+    Route::get("/atrakcje/{slug}", [AttractionController::class, 'show'])->name('attraction.show');
 });

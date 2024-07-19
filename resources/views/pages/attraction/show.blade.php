@@ -6,5 +6,4 @@
         <livewire:attraction-list />
     </main>
 
-
 </x-layouts.app>
