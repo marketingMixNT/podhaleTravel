@@ -1,3 +1,9 @@
+html {
+    scroll-behavior: smooth;
+  }
+
+
+
 //CATEGORIES
 .active{
     @apply bg-bgDark-800 dark:bg-bgDark-400 text-fontLight  border-none hover:bg-bgDark-800 dark:hover:bg-bgDark-600

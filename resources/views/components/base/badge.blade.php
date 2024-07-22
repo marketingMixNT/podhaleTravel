@@ -9,7 +9,7 @@
 @endphp
 
 <a {{ $attributes }} href="{{ $href }}"
-    class=" duration-500 hover:shadow-xl
+    class="text-center duration-500 hover:shadow-xl 
         {{ $type }}
        {{ $class }}
     

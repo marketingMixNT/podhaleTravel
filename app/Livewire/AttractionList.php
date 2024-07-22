@@ -57,7 +57,7 @@ class AttractionList extends Component
             ->whereRaw('LOWER(name) like ?', ["%" . strtolower($this->search) . "%"])
 
 
-            ->orderBy('order', 'desc')->paginate(5);
+            ->orderBy('order', 'desc')->paginate(2);
     }
 
     #[Computed]
@@ -126,9 +126,12 @@ class AttractionList extends Component
         $this->resetPage();
         $this->emitSelf('refreshComponent');
     }
+    
 
     public function getCurrentLocale()
     {
         return app()->getLocale();
     }
+
+    
 }
