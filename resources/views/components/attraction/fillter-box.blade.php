@@ -1,6 +1,3 @@
-
-
-
 {{-- CONTAINER --}}
 <div class="w-full flex flex-col xl:flex-row justify-between items-center gap-8 lg:gap-16 pb-12">
     {{-- categories & tags & cities --}}
@@ -60,9 +57,11 @@
         {{-- SearchBox --}}
         <x-search-box />
         {{-- clear --}}
-        <x-base.badge type='large' wire:navigate href="{{ route('attraction.index') }}"
-            class="bg-bgLight-800 hover:bg-bgLight-600 duration-500 dark:text-fontDark">Wyczyść</x-base.badge>
+    
+            <x-base.badge type='large' wire:navigate  href="{{ route('attraction.index') }}"
+                class="bg-bgLight-800 hover:bg-bgLight-600 duration-500 dark:text-fontDark ">Wyczyść</x-base.badge>
+    
+
     </div>
 
 </div>
-

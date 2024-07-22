@@ -25,6 +25,7 @@ models:
   City:
     name: json unique
     slug: json unique
+    thumbnail: text
     relationships:
       hasMany: Attraction
 

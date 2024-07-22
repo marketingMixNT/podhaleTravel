@@ -104,5 +104,10 @@ class Category extends Model
         return $formatName;
     }
 
+    public function getThumbnailUrl() :string
+    {
+        return  asset('storage/' . $this->thumbnail);
+    }
+
     public $translatable = ['name', 'slug'];
 }
