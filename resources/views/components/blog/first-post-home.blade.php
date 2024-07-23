@@ -14,7 +14,7 @@
     <div class="flex justify-start items-center gap-5">
 
         @foreach ($post->categories as $category)
-            <x-base.badge class="mr-4" wire:navigate
+            <x-base.badge wire:key='{{$category->id}}' class="mr-4" 
                 href="{{ route('attraction.index', ['category' => $category->slug]) }}">{{ $category->getFormatName() }}</x-base.badge>
         @endforeach
 

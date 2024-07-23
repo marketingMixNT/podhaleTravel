@@ -1,6 +1,6 @@
-<div>
-    <x-home.hero :categories="$categories"/>
-    <x-home.attractions :attractions="$attractions"/>
+<main>
+    <x-home.hero :categories="$this->categories"/>
+    <x-home.attractions :attractions="$this->attractions"/>
     <x-home.map />
-    <x-home.blog :posts="$posts"/>
-</div>
+    <x-home.blog :posts="$this->posts"/>
+</main>

@@ -6,21 +6,19 @@
         <h1 class="text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-medium" style="line-height: 1.2"><span
                 id="jsTyping"></span> <br> czekają na Ciebie</h1>
 
-        <x-base.link-btn href="#">Sprawdź</x-base.link-btn>
+        <x-base.link-btn href="{{ route('attraction.index') }}">Sprawdź</x-base.link-btn>
     </div>
     {{-- img --}}
     <div class="relative h-[500px] lg:h-[80vh] 2xl:h-[85vh] overflow-hidden">
-        <img src="{{ asset('assets/img/hero-home.jpg') }}" alt="wspaniały widok na norweskie miasto"
-            class="h-full w-full object-cover hover:scale-105 duration-500" width="884" height="901">
+        <img src="{{ asset('assets/img/hero-home.jpg') }}" alt="wspaniały widok na na podhalańskie Tatry"
+            class="h-full w-full object-cover scale-hover" width="884" height="901">
 
         <div class="absolute right-5 bottom-5 flex flex-col xs:flex-row gap-6">
             {{-- LOOP --}}
-            @foreach ($categories->take(3) as $category)
-            <x-base.badge href="{{ route('attraction.index', ['category' => $category->slug]) }}">{{$category->getFormatName()}}</x-base.badge>
-         
+            @foreach ($this->categories->take(3) as $category)
+                <x-base.badge wire::key="{{$category->id}}"
+                    href="{{ route('attraction.index', ['category' => $category->slug]) }}">{{ $category->getFormatName() }}</x-base.badge>
             @endforeach
-            
-
         </div>
     </div>
 </div>

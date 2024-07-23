@@ -8,7 +8,7 @@
         <x-logo-link />
         {{-- nav --}}
         <nav id="menu"
-            class="fixed lg:static top-[121px] left-0 right-0 bottom-0  flex justify-center items-center bg-primary-400  lg:bg-transparent dark:lg:bg-transparent translate-x-[100%] lg:translate-x-0 duration-500  ease-in-out z-50">
+            class="fixed lg:static top-[121px] left-0 right-0 bottom-0  flex justify-center items-center bg-bgDark-400  lg:bg-transparent dark:lg:bg-transparent translate-x-[100%] lg:translate-x-0 duration-500  ease-in-out z-50">
             <x-nav.nav-list />
             <x-nav.theme-toggler class="absolute top-4 right-4 lg:hidden" />
             <x-social light class="absolute bottom-4 left-4 lg:hidden" />

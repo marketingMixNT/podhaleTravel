@@ -1,4 +1,4 @@
-<x-base.section >
+<x-base.section class="bg-bgLight-200">
 
     <x-base.heading subheading="Atrakcje" heading="Polecane atrakcje" />
 
@@ -6,12 +6,12 @@
 
         @foreach ($attractions as $attraction)
 
-            <x-attraction.card :attraction="$attraction" />
+            <x-attraction.card wire:key="{{$attraction->id}}" :attraction="$attraction" />
         @endforeach
     </div>
 
     <div class="flex justify-end items-center">
 
-        <a wire:navigate href="{{route('attraction.index')}}" class="link-hover">Zobacz wszystkie</a>
+        <x-base.link  href="{{route('attraction.index')}}">Zobacz wszystkie</x-base.link>
     </div>
 </x-base.section>

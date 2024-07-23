@@ -15,7 +15,7 @@
             <div class="flex justify-start items-center mt-6  gap-y-3 flex-wrap">
 
                 @foreach ($attraction->categories as $category)
-                    <x-base.badge class="mr-4" wire:navigate
+                    <x-base.badge class="mr-4" wire:key="{{$category->id}}"
                         href="{{ route('attraction.index', ['category' => $category->slug]) }}">{{ $category->getFormatName() }}</x-base.badge>
                 @endforeach
             </div>
@@ -25,14 +25,13 @@
 
             <div class="flex flex-col justify-between items-start gap-2">
                 <h2 class="text-3xl font-medium">{{ $attraction->name }}</h2>
-                <div>
-                    <span class="text-sm">{{ $attraction->address }}</span>
-                    <span class="text-sm">{{ $attraction->city->getFormatName() }}</span>
+                <div class="text-sm">
+                    <span >{{ $attraction->address }}, </span>
+                    <span class="font-semibold">{{ $attraction->city->getFormatName() }}</span>
                 </div>
-                {{-- <span class="text-sm">od <span class="text-lg">{{ $apartment->price }}</span> zł</span> --}}
 
             </div>
-            <div class=" xl:self-end mb-3"><x-base.link-btn type="secondary"
+            <div class=" xl:self-end mb-3"><x-base.link-btn type="wider"
                     href="{{ route('attraction.show', $attraction->slug) }}">Sprawdź</x-base.link-btn></div>
         </div>
     </a>
