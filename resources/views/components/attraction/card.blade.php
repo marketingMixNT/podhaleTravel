@@ -1,7 +1,7 @@
 @props(['attraction'])
 
 <div class="flex flex-col group gap-3 ">
-    <a href="{{ route('attraction.show', $attraction->slug) }}">
+    <a wire:navigate href="{{ route('attraction.show', $attraction->slug) }}">
         {{-- IMG & CATEGORIES --}}
         <div class="overflow-hidden relative">
             {{-- img --}}

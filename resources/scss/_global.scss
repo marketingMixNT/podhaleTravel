@@ -1,13 +1,33 @@
 html {
     scroll-behavior: smooth;
-  }
+}
 
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6,
+.prose p,
+.prose span,
+.prose ul,
+.prose li, 
+.prose strong 
+{
+    @apply text-fontDark dark:text-fontLight;
+}
+.prose{
+    max-width: 100% !important;
+}
 
+.prose h3{
+    @apply text-3xl
+}
 
 //CATEGORIES
-.active{
-    @apply bg-bgDark-800 dark:bg-bgDark-400 text-fontLight  border-none hover:bg-bgDark-800 dark:hover:bg-bgDark-600
+.active {
+    @apply bg-bgDark-800 dark:bg-bgDark-400 text-fontLight  border-none hover:bg-bgDark-800 dark:hover:bg-bgDark-600;
 }
-.inactive{
-    @apply bg-bgLight-200 border border-fontDark hover:bg-bgLight-400 dark:text-fontDark
+.inactive {
+    @apply bg-bgLight-200 border border-fontDark hover:bg-bgLight-400 dark:text-fontDark;
 }

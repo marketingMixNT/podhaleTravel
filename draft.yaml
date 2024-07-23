@@ -16,10 +16,9 @@ models:
     email: string nullable
     featured: boolean
     order: integer nullable
-
     relationships:
       belongsTo: User, City
-      belongsToMany: Category, Tag
+      belongsToMany: Category, Tag, Attraction
       hasMany: Social
 
   City:
@@ -49,4 +48,17 @@ models:
     link: text
     relationships:
       belongsTo: Attraction
+
+  Post:
+    meta_title: json nullable
+    meta_desc: json nullable
+    title: json unique
+    slug: json unique
+    thumbnail: text
+    content: json unique
+    published_at: datetime nullable
+    featured: boolean nullable
+    relationships:
+      belongsToMany: Category, Attraction
+      belongsTo: User
 

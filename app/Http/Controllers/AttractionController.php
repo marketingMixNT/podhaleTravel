@@ -15,11 +15,21 @@ class AttractionController extends Controller
         return view("pages.attraction.index", compact("attractions"));
     }
 
-    public function show(Attraction $attraction)
+    public function show($slug)
     {
+        $attraction = Attraction::with('categories')->where('slug->pl', $slug)->firstOrFail();
 
-        $attraction = Attraction::with('categories')->find($attraction->id);
+        $categoryIds = $attraction->categories->pluck('id');
 
-        return view("pages.attraction.show", compact("attraction"));
+        $similarAttractions = Attraction::with('categories')->whereHas('categories', function ($query) use ($categoryIds) {
+            $query->whereIn('categories.id', $categoryIds);
+        })
+            ->where('id', '!=', $attraction->id)
+            ->take(5)
+            ->get();
+
+      
+
+        return view("pages.attraction.show", compact("attraction", "similarAttractions"));
     }
 }

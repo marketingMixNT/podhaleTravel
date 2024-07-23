@@ -1,0 +1,51 @@
+<x-base.section>
+
+    <div class="flex flex-col gap-16 ">
+
+
+        <x-base.heading-third heading="Kontakt"
+            subheading="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet tristique massa," />
+
+        <div class="flex">
+
+            <div class="w-1/2 flex flex-col justify-end items-start p-12 gap-4">
+                <x-iconpark-mapdraw class="text-fontDark dark:text-fontLight w-8" />
+
+                <div class="flex justify-center items-center gap-1">
+                    <a class="text-xl font-semibold link-hover" href="{{ $attraction->link }}">{{ $attraction->name }}</a>
+                    <x-iconpark-arrowrightup-o class="w-6 text-fontDark dark:text-fontLight" />
+
+
+                </div>
+                <span>{{ $attraction->address }}, {{ $attraction->city->name }}</span>
+                <div class="flex flex-col justify-start items-start gap-2 ">
+                    <h2 class="font-bold">Kontakt</h2>
+                    <div class="flex justify-start items-center gap-2 ml-2">
+                        <x-iconpark-phonetelephone-o class="w-5 mt-[2px]" />
+                        <a href="tel:+48{{ $attraction->phone }}" class="link-hover">+48{{ $attraction->phone }}</a>
+                    </div>
+                    <div class="flex justify-start items-center gap-2 ml-2">
+                        <x-iconpark-mail-o class="w-5 mt-[2px]" />
+                        <a href="mailto:{{ $attraction->mail }}" class="link-hover">{{ $attraction->email }}</a>
+                    </div>
+                </div>
+                @if ($attraction->socials)
+                <div class="flex flex-col justify-start items-start gap-2 ">
+                    <h2 class="font-bold">Social Media</h2>
+                    <x-attraction.show.socials :attraction="$attraction" />
+                </div>
+            @endif
+            
+                
+                    <a href="{{ $attraction->site_link }}" class="font-bold link-hover">Strona internetowa</a>
+                
+           
+            </div>
+            <div class="w-1/2">
+                {!! $attraction->google_maps_frame !!}
+            </div>
+        </div>
+
+    </div>
+
+</x-base.section>

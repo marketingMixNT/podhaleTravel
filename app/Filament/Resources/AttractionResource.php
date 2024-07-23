@@ -172,7 +172,9 @@ class AttractionResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('category_id')
                             ->label('Kategoria')
-                            ->relationship('categories', 'name')
+                            ->relationship('categories', 'name', function ($query) {
+                                $query->where('type', 'attractions');
+                            })
                             ->multiple()
                             ->preload()
                             ->searchable()
