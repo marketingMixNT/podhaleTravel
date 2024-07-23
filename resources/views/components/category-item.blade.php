@@ -8,7 +8,7 @@
         <div class="flex flex-col gap-1">
             <h3 class="font-medium text-white text-2xl">{{ $category->getFormatName() }}</h3>
             <span class="text-sm text-white">
-                {{ $category->attractions_count }} -
+                {{ $category->attractions_count }}
                 @if ($category->attractions_count === 1)
                     atrakcja
                 @elseif($category->attractions_count >= 2 && $category->attractions_count <= 4)
