@@ -1,4 +1,4 @@
-<div class="flex justify-center items-center gap-2">
+<div class="flex justify-center items-center gap-2 ml-2">
     @foreach ($attraction->socials as $social)
         @if ($social->name == 'facebook')
             <a href="{{$social->link}}" target="_blank">

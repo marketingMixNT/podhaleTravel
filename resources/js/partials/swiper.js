@@ -12,58 +12,56 @@ import "swiper/swiper-bundle.css";
 
 
 // ADVANTAGES
+// document.addEventListener("livewire:navigated", () => {
+//     new Swiper(".advantages-swiper", {
+//         loop: true,
+//         effect: "fade",
+//         // grabCursor: true,
+//         slidesPerView: 2,
+
+//         breakpoints: {
+//             450: {
+//                 slidesPerView: 3,
+//             },
+//             650: {
+//                 slidesPerView: 4,
+//             },
+//             1000: {
+//                 slidesPerView: 5,
+//             },
+//             1250: {
+//                 slidesPerView: 7,
+//             },
+//         },
+
+//         autoplay: {
+//             delay: 3500,
+//             disableOnInteraction: true,
+//             pauseOnMouseEnter: true,
+//         },
+//         navigation: {
+//             nextEl: ".advantages-next",
+//             prevEl: ".advantages-prev",
+//         },
+
+//         modules: [Autoplay, Navigation],
+//     });
+// });
+//ATTRACTION GALLERY
 document.addEventListener("livewire:navigated", () => {
-    new Swiper(".advantages-swiper", {
+    new Swiper(".attraction-gallery-swiper", {
         loop: true,
-        effect: "fade",
-        grabCursor: true,
-        slidesPerView: 2,
-
-        breakpoints: {
-            450: {
-                slidesPerView: 3,
-            },
-            650: {
-                slidesPerView: 4,
-            },
-            1000: {
-                slidesPerView: 5,
-            },
-            1250: {
-                slidesPerView: 7,
-            },
-        },
-
-        autoplay: {
-            delay: 3500,
-            disableOnInteraction: true,
-            pauseOnMouseEnter: true,
-        },
-        navigation: {
-            nextEl: ".advantages-next",
-            prevEl: ".advantages-prev",
-        },
-
-        modules: [Autoplay, Navigation],
-    });
-});
-//APARTMENT GALLERY
-document.addEventListener("livewire:navigated", () => {
-    new Swiper(".apartment-gallery-swiper", {
-        loop: true,
-        effect: "fade",
-        grabCursor: true,
         slidesPerView: 1,
         centeredSlides: true,
         spaceBetween: 50,
         breakpoints: {
-            450: {
+            650: {
                 slidesPerView: 2,
             },
-            650: {
+            1000: {
                 slidesPerView: 3,
             },
-            1000: {
+            1500: {
                 slidesPerView: 4,
             },
         },
@@ -74,14 +72,35 @@ document.addEventListener("livewire:navigated", () => {
             pauseOnMouseEnter: true,
         },
         navigation: {
-            nextEl: ".apartment-gallery-next",
-            prevEl: ".apartment-gallery-prev",
+            nextEl: ".attraction-gallery-next",
+            prevEl: ".attraction-gallery-prev",
         },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
+       
+        modules: [Autoplay, Navigation,]
+    });
+});
+//ATTRACTION GALLERY
+document.addEventListener("livewire:navigated", () => {
+    new Swiper(".attraction-post-swiper", {
+        loop: true,
+        slidesPerView: 1,
+        grabCursor:true,
+        // centeredSlides: true,
+        spaceBetween: 50,
+        breakpoints: {
+
+            1500: {
+                slidesPerView: 3,
+            },
         },
 
-        modules: [Autoplay, Navigation, Pagination],
+        autoplay: {
+            delay: 3500,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true,
+        },
+      
+       
+        modules: [Autoplay,]
     });
 });

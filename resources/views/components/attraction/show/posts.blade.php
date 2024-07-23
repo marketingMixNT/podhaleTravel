@@ -4,19 +4,26 @@
 
 
       
-            <x-base.heading-third heading="Galeria"
-                subheading="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet tristique massa," />
+            <x-base.heading-third heading="Artykuły "
+                subheading="Przeczytaj artykuły dotyczące atrakcji bla bla bla" />
    
 
 
-        <div class="flex justify-center gap-x-12">
+        <div class="flex justify-center gap-x-12 max-w-screen-xl mx-auto">
+
+           @foreach ($this->attraction->posts as $post)
+               
+           <x-blog.post-card-simple wire:id="{{$attraction->id}}" :post="$post"/>
+           @endforeach
 
            
-          
-        <x-blog.post-card-simple :attraction="$attraction"/>
-        <x-blog.post-card-simple :attraction="$attraction"/>
-        <x-blog.post-card-simple :attraction="$attraction"/>
+    
+    </div>
+        
 
+        </div>
+        <div class="flex justify-center items-center w-full">
+            <a wire:navigate href="#" class="link-hover">Zobacz wszystkie</a
         </div>
     </div>
 

@@ -1,11 +1,14 @@
-@props(['attraction'])
+@props(['post','class'=>''])
 
-<div class="w-1/3 h-full flex flex-col justify-start gap-6 group">
+<div class="w-1/3 h-full flex flex-col justify-start gap-6 group {{$class}}">
     {{-- thumbnail --}}
-    <a href="#" class="overflow-hidden">
-        <img src="{{ $attraction->getThumbnailUrl() }}" alt="{{ $attraction->name }}"
+    <a wire:navigate href="{{route('blog.show',$post->slug)}}" >
+        <div class="overflow-hidden">
+
+            <img src="{{ $post->getThumbnailUrl() }}" alt="{{ $post->title }}"
             class="group-hover:scale-110 duration-500 lg:h-[400px] object-cover w-full aspect-video"
             width="624" height="400" loading="lazy">
+        </div>
     </a>
     {{-- categories & reading time --}}
     <div class="flex justify-start items-center gap-5">
@@ -14,18 +17,18 @@
             <x-ui.link-btn wire:navigate :key="$category->slug" type='secondary' href="{{ $category->slug }}">{{ $category->title }}</x-ui.link-btn>
         @endforeach --}}
 
-        <span class="text-sm">5 min</span>
+        <span class="text-sm">{{$post->getReadingTime()}} min</span>
 
     </div>
     {{-- title & excerpt --}}
-    <div class="flex flex-col justify-start gap-6">
+    <dsiv class="flex flex-col justify-start gap-6">
 
-        <h3 class="text-2xl md:text-[28px] lg:text-3xl font-medium">testowy tytuł</h3>
-        <p>asdasdsadsadasdasdasdasdasdsadsadsdasdasd</p>
+        <h3 class="text-2xl md:text-[28px] lg:text-3xl font-medium">{{$post->title}}</h3>
+        <p>{{$post->getExcerpt()}}</p>
 
-        <x-base.link href="#">Czytaj</x-base.link>
+        <x-base.link href="{{route('blog.show',$post->slug)}}">Czytaj</x-base.link>
 
-    </div>
+    </dsiv>
    
 
 </div>

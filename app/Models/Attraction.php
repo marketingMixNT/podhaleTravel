@@ -61,6 +61,11 @@ class Attraction extends Model
         'city_id' => 'integer',
     ];
 
+    public function posts(): BelongsToMany
+    {
+        return $this->belongsToMany(Post::class);
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

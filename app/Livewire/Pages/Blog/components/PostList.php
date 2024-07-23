@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Pages\Blog\Components;
 
 use App\Models\Post;
 use Livewire\Component;
 use App\Models\Category;
-use Livewire\WithPagination;
 use Livewire\Attributes\Url;
+use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
 
 class PostList extends Component

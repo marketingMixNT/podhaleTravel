@@ -106,6 +106,17 @@ class PostResource extends Resource
                             ->searchable()
                             ->createOptionForm(Category::getForm())
                             ->placeholder('Mozesz wybrac kilka'),
+
+
+                            Forms\Components\Select::make('attraction_id')
+                            ->label('Atrakcja')
+                            ->relationship('attractions', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable()
+                            // ->createOptionForm(Category::getForm())
+                            ->placeholder('Mozesz wybrac kilka'),
+
                     ]),
                 Section::make('Publikacja')
                     ->icon('heroicon-o-clock')

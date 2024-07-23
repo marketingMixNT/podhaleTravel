@@ -15,13 +15,13 @@
                 </a>
             </div>
             {{-- CONTENT --}}
-            <div class="flex flex-col justify-start items-start gap-5 h-full">
+            <div class="flex flex-col justify-start items-start gap-2 h-full">
                 {{-- category & reading time --}}
                 <div class="flex justify-start items-center gap-6">
                     @foreach ($post->categories as $category)
-                        <x-base.link-btn wire:navigate  type='secondary' :key="$category->slug"
-                            href="{{ route('blog.index', ['category' => $category->slug]) }}">{{ $category->title }}</x-base.link-btn>
-                    @endforeach
+                    <x-base.badge class="mr-4" wire:navigate
+                        href="{{ route('attraction.index', ['category' => $category->slug]) }}">{{ $category->getFormatName() }}</x-base.badge>
+                @endforeach
                     <span class="text-sm">{{ $post->getReadingTime() }} min</span>
                 </div>
                 {{-- text --}}
