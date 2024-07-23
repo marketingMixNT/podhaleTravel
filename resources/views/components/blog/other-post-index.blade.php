@@ -5,11 +5,14 @@
         <div class="w-full flex flex-col justify-start items-start gap-8">
             {{-- IMG --}}
             <div class="w-full">
-                <a href="{{ route('blog.show', $post->slug) }}" class="overflow-hidden">
-                    <img src="{{ $post->getThumbnailUrl() }}" alt="{{ $post->title }}"
+                <a href="{{ route('blog.show', $post->slug) }}" >
+                    <div class="overflow-hidden">
+
+                        <img src="{{ $post->getThumbnailUrl() }}" alt="{{ $post->title }}"
                         {{-- class="group-hover:scale-110 duration-500 object-cover w-full aspect-video lg:aspect-[4/3]" width="624" --}}
                         class="group-hover:scale-110 duration-500  object-cover w-full aspect-[4/3] sm:aspect-video lg:aspect-[4/3]" width="624"
                         height="400" loading="lazy">
+                    </div>
 
                         {{-- group-hover:scale-110 duration-500  object-cover w-full aspect-square sm:aspect-video lg:aspect-square --}}
                 </a>

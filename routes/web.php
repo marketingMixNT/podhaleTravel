@@ -1,19 +1,17 @@
 <?php
 
+use App\Livewire\Home;
 use Livewire\Livewire;
-use App\Models\Attraction;
-use Illuminate\Support\Facades\Route;
-use App\Livewire\Pages\Attraction\AttractionIndex;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\CityController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\AttractionController;
-use App\Livewire\Category\CategoryIndex;
 use App\Livewire\City\CityIndex;
-use App\Livewire\Pages\Attraction\AttractionShow;
+use Illuminate\Support\Facades\Route;
 use App\Livewire\Pages\Blog\BlogIndex;
+
+use App\Http\Controllers\BlogController;
+
+use App\Livewire\Category\CategoryIndex;
+use App\Http\Controllers\ContactController;
+use App\Livewire\Pages\Attraction\AttractionShow;
+use App\Livewire\Pages\Attraction\AttractionIndex;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
@@ -25,7 +23,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         return Route::post('/livewire/update', $handle);
     });
 
-    Route::get('/', HomeController::class)->name('home');
+    Route::get('/', Home::class)->name('home');
     Route::get('/atrakcje', AttractionIndex::class)->name('attraction.index');
     Route::get("/atrakcje/{slug}", AttractionShow::class)->name('attraction.show');
     Route::get('/kategorie', CategoryIndex::class)->name('category.index');

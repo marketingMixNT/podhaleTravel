@@ -13,10 +13,7 @@ class CategoryIndex extends Component
     public $title = 'Wszystkie Kategorie';
     public $description = 'meta kategorii';
 
-    public function mount()
-    {
-        // Nie przypisuj wyniku paginacji do właściwości
-    }
+ 
 
     public function render()
     {

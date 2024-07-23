@@ -18,6 +18,7 @@
     "dependencies": {
         "flowbite": "^2.4.1",
         "fslightbox": "^3.4.1",
-        "swiper": "^11.1.5"
+        "swiper": "^11.1.5",
+        "typed.js": "^2.1.0"
     }
 }
