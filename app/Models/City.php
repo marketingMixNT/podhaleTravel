@@ -66,8 +66,14 @@ class City extends Model
 
     public function getFormatName()
     {
-        $formatName = Str::title($this->name);  // Zamienia pierwszą literę każdego słowa na wielką
+        $formatName = strtolower($this->name);
+        $formatName = ucfirst($formatName);
         return $formatName;
+    }
+
+    public function getThumbnailUrl() :string
+    {
+        return  asset('storage/' . $this->thumbnail);
     }
 
     public $translatable = ['name', 'slug'];
