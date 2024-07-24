@@ -1,12 +1,14 @@
 
-<div class="flex flex-col group  h-fit">
+@props(['class'=>'','attraction'])
+
+<div class="flex flex-col group  h-fit {{$class}}">
    
 
         <div class="overflow-hidden relative">
             <div class="overflow-hidden">
 
                 <img src="{{ $attraction->getThumbnailUrl() }}" alt="{{ $attraction->title }}"
-                    class="hover:scale-105 duration-500">
+                    class="hover:scale-105 duration-500  min-h-[275px]">
             </div>
 
             <div class="flex justify-start items-center mt-4  gap-y-3 flex-wrap">

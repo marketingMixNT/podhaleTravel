@@ -14,6 +14,6 @@ class BlogIndex extends Component
         return view('livewire.blog.blog-index')->layout('components.layouts.app', [
             'title' => $this->title,
             'description' => $this->description
-        ]);;
+        ]);
     }
 }

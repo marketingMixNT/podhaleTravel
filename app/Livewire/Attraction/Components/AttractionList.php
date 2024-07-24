@@ -1,19 +1,15 @@
 <?php
 
-namespace App\Livewire;
-
-use Illuminate\Support\Facades\Cache;
+namespace App\Livewire\Attraction\Components;
 
 use App\Models\Tag;
 use App\Models\City;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\Attraction;
-use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
-use Illuminate\Support\Facades\Log;
 
 class AttractionList extends Component
 {
@@ -57,7 +53,7 @@ class AttractionList extends Component
             ->whereRaw('LOWER(name) like ?', ["%" . strtolower($this->search) . "%"])
 
 
-            ->orderBy('order', 'desc')->paginate(2);
+            ->orderBy('order', 'desc')->paginate(4);
     }
 
     #[Computed]
@@ -132,6 +128,4 @@ class AttractionList extends Component
     {
         return app()->getLocale();
     }
-
-    
 }

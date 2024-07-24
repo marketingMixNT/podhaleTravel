@@ -8,11 +8,13 @@ use App\Livewire\City\CityIndex;
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\BlogController;
+
 use App\Livewire\Category\CategoryIndex;
-use App\Http\Controllers\ContactController;
-use App\Livewire\Pages\Attraction\AttractionShow;
-use App\Livewire\Pages\Attraction\AttractionIndex;
+
+use App\Livewire\Blog\BlogShow;
+use App\Livewire\Attraction\AttractionShow;
+use App\Livewire\Attraction\AttractionIndex;
+use App\Livewire\Contact\ContactIndex;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
@@ -29,7 +31,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
     Route::get("/atrakcje/{slug}", AttractionShow::class)->name('attraction.show');
     Route::get('/kategorie', CategoryIndex::class)->name('category.index');
     Route::get('/miejscowosci', CityIndex::class)->name('city.index');
-    Route::get('/kontakt', ContactController::class)->name('contact');
+    Route::get('/kontakt', ContactIndex::class)->name('contact');
     Route::get('/blog', BlogIndex::class)->name('blog.index');
-    Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+    Route::get('/blog/{slug}', BlogShow::class)->name('blog.show');
 });

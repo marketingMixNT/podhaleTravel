@@ -1,15 +1,15 @@
 <x-base.section>
 
-    <div class="flex flex-col gap-16 ">
+    <div class="flex flex-col gap-8 lg:gap-16 ">
 
 
         <x-base.heading-third heading="Kontakt"
             subheading="Dane adresowe itd. bla bla bla" />
 
-        <div class="flex justify-center items-center">
+        <div class="flex flex-col lg:flex-row justify-center items-center">
 
             {{-- text --}}
-            <div class="w-1/2 flex flex-col justify-end items-start p-12 gap-4">
+            <div class="w-full lg:w-[40%] flex flex-col justify-end items-start p-12 gap-4">
                 <x-iconpark-mapdraw class="text-fontDark dark:text-fontLight w-8" />
 
                 <div class="flex justify-center items-center gap-1">
@@ -50,7 +50,7 @@
 
             </div>
             {{-- google maps iframe --}}
-            <div class="w-1/2">
+            <div class="w-full lg:w-[60%] h-[500px]">
                 {!! $attraction->google_maps_frame !!}
             </div>
         </div>

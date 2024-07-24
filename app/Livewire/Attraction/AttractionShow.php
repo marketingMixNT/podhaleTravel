@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Pages\Attraction;
+namespace App\Livewire\Attraction;
 
 use Livewire\Component;
 use App\Models\Attraction;
@@ -31,10 +31,10 @@ class AttractionShow extends Component
             ->take(5)
             ->get();
     }
-
+   
     public function render()
     {
-        return view('livewire.pages.attraction.attraction-show', [
+        return view('livewire.attraction.attraction-show', [
             'attraction' => $this->attraction,
             'similarAttractions' => $this->similarAttractions,
         ])->layout('components.layouts.app', [

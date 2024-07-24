@@ -9,8 +9,9 @@
    
 
 
-        <div class="flex justify-center gap-x-12 max-w-screen-xl mx-auto">
+        {{-- <div class="flex justify-center gap-x-12 max-w-screen-xl mx-auto">
 
+            
            @foreach ($this->attraction->posts as $post)
                
            <x-blog.post-card-simple wire:id="{{$attraction->id}}" :post="$post"/>
@@ -18,12 +19,28 @@
 
            
     
+    </div> --}}
+    <div class="flex justify-center items-center gap-x-12 w-full">
+
+           
+
+        <div class="swiper similar-attraction-swiper">
+            <div class="swiper-wrapper">
+                @foreach ($this->attraction->posts as $post)
+               
+                <x-blog.post-card-simple wire:id="{{$attraction->id}}" :post="$post" class="swiper-slide"/>
+                @endforeach
+
+
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
     </div>
         
 
         </div>
         <div class="flex justify-center items-center w-full">
-            <a wire:navigate href="#" class="link-hover">Zobacz wszystkie</a
+            <a wire:navigate href="" class="link-hover">Zobacz wszystkie</a
         </div>
     </div>
 

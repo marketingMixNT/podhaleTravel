@@ -79,20 +79,60 @@ document.addEventListener("livewire:navigated", () => {
         modules: [Autoplay, Navigation,]
     });
 });
-//ATTRACTION GALLERY
+
+
+// ATTRACTIONS POSTS
 document.addEventListener("livewire:navigated", () => {
-    new Swiper(".attraction-post-swiper", {
+    new Swiper(".attraction-posts-swiper", {
         loop: true,
         slidesPerView: 1,
         grabCursor:true,
-        // centeredSlides: true,
+   
         spaceBetween: 50,
         breakpoints: {
-
-            1500: {
-                slidesPerView: 3,
+            850: {
+                slidesPerView: 2,
             },
+            1280: {
+                slidesPerView: 3,
+            }
         },
+
+          
+
+        autoplay: {
+            delay: 3500,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true,
+        },
+      
+       
+        modules: [Autoplay,]
+    });
+});
+
+
+
+
+
+//SIMILAR ATTRACTIONS
+document.addEventListener("livewire:navigated", () => {
+    new Swiper(".similar-attraction-swiper", {
+        loop: true,
+        slidesPerView: 1,
+        grabCursor:true,
+   
+        spaceBetween: 50,
+        breakpoints: {
+            850: {
+                slidesPerView: 2,
+            },
+            1280: {
+                slidesPerView: 3,
+            }
+        },
+
+          
 
         autoplay: {
             delay: 3500,

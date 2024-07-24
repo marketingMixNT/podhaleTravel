@@ -1,4 +1,4 @@
-<div>
+<main>
     <x-attraction.show.hero :attraction="$attraction" />
     <x-attraction.show.info :attraction="$attraction" />
     <x-attraction.show.description :attraction="$attraction" />
@@ -10,4 +10,4 @@
     <x-base.section class="bg-black">
         tutaj pasuje coś opisać ze podhale jest wspaniałe i ze zachecamy do odwiedzania tego wspaniałego regionu
     </x-base.section>
-</div>
+</main>
