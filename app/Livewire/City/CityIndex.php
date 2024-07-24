@@ -5,6 +5,7 @@ namespace App\Livewire\City;
 use App\Models\City;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Computed;
 
 class CityIndex extends Component
 {
@@ -13,21 +14,18 @@ class CityIndex extends Component
     public $title = 'Wszystkie Miejscowości';
     public $description = 'meta cities';
 
-    public function mount()
+    #[Computed(persist: true, seconds: 7200)]
+    public function getCitiesProperty()
     {
-        // Nie przypisuj wyniku paginacji do właściwości
+        return City::withCount('attractions')
+        ->having('attractions_count', '>', 0)
+        ->orderBy('attractions_count', 'desc')
+        ->paginate(6);
     }
 
     public function render()
     {
-        $cities = City::withCount('attractions')
-            ->having('attractions_count', '>', 0)
-            ->orderBy('attractions_count', 'desc')
-            ->paginate(6);
-
-        return view('livewire.city.city-index', [
-            'cities' => $cities
-        ])->layout('components.layouts.app', [
+        return view('livewire.city.city-index')->layout('components.layouts.app', [
             'title' => $this->title,
             'description' => $this->description
         ]);

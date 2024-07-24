@@ -1,14 +1,14 @@
-<main>
+<x-base.main>
     <x-base.heading-secondary heading="Kategorie"
         text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam, illo." />
 
-    <x-base.section tight>
+    <x-base.section tight id="content">
 
 
         <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-8  md:gap-y-6 md:gap-x-4">
 
-            @foreach ($categories as $category)
-                <x-category-item wire:key="{{$category->id}}" :category="$category" />
+            @foreach ($this->categories as $item)
+                <x-item-card wire:key="{{$item->id}}" :item="$item" />
             @endforeach
 
         </div>
@@ -16,6 +16,6 @@
     </x-base.section>
 
      {{-- PAGINATION --}}
-     {{ $categories->links('vendor.livewire.tailwind') }}
+     {{ $this->categories->links('vendor.livewire.tailwind') }}
 
-</main>
+</x-base.main>

@@ -2,12 +2,13 @@
 
 use App\Livewire\Home;
 use Livewire\Livewire;
+use App\Livewire\Blog\BlogIndex;
 use App\Livewire\City\CityIndex;
+
+
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Pages\Blog\BlogIndex;
 
 use App\Http\Controllers\BlogController;
-
 use App\Livewire\Category\CategoryIndex;
 use App\Http\Controllers\ContactController;
 use App\Livewire\Pages\Attraction\AttractionShow;

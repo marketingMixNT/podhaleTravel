@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Pages\Blog\Components;
+namespace App\Livewire\Blog\Components;
 
 use App\Models\Post;
 use Livewire\Component;
@@ -30,7 +30,7 @@ class PostList extends Component
                 });
             })
             ->orderBy('published_at', 'desc')
-            ->paginate(12);
+            ->paginate(7);
     }
 
     #[Computed]
@@ -53,11 +53,5 @@ class PostList extends Component
         return app()->getLocale();
     }
 
-    // public function render()
-    // {
-    //     return view('livewire.post-list', [
-    //         'posts' => $this->posts,
-    //         'categories' => $this->categories
-    //     ]);
-    // }
+  
 }

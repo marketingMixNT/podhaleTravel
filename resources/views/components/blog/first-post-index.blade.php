@@ -1,7 +1,7 @@
 <div class="flex flex-col lg:flex-row gap-12 group">
     <div class="w-full lg:w-[60%] flex">
         {{-- img --}}
-        <a href="{{ route('blog.show', $post->slug) }}" class="overflow-hidden">
+        <a wire:navigate href="{{ route('blog.show', $post->slug) }}" class="overflow-hidden w-full">
             <img src="{{ $post->getThumbnailUrl() }}" alt="{{ $post->title }}"
                 class="group-hover:scale-110 duration-500  object-cover w-full aspect-square sm:aspect-video lg:aspect-square  max-h-[500px] lg:max-h-[700px]" width="624"
                 height="400" loading="lazy">
@@ -12,8 +12,8 @@
         <div class="flex justify-start items-center gap-5">
 
             @foreach ($post->categories as $category)
-            <x-base.badge class="mr-4" wire:navigate
-                href="{{ route('attraction.index', ['category' => $category->slug]) }}">{{ $category->getFormatName() }}</x-base.badge>
+            <x-base.badge class="mr-4" wire:key='{{$category->id}}'
+                href="{{ route('blog.index', ['category' => $category->slug]) }}">{{ $category->getFormatName() }}</x-base.badge>
         @endforeach
 
             <span class="text-sm">{{ $post->getReadingTime() }} min</span>
