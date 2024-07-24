@@ -2,18 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Spatie\Translatable\HasTranslations;
-
 
 class Attraction extends Model
 {
     use HasTranslations;
+
     use HasFactory;
 
     /**
@@ -51,20 +50,15 @@ class Attraction extends Model
         'id' => 'integer',
         'name' => 'array',
         'slug' => 'array',
+        'gallery' => 'array',
         'meta_title' => 'array',
         'meta_desc' => 'array',
         'short_desc' => 'array',
         'desc' => 'array',
-        'gallery' => 'array',
         'featured' => 'boolean',
         'user_id' => 'integer',
         'city_id' => 'integer',
     ];
-
-    public function posts(): BelongsToMany
-    {
-        return $this->belongsToMany(Post::class);
-    }
 
     public function user(): BelongsTo
     {
@@ -76,6 +70,10 @@ class Attraction extends Model
         return $this->belongsTo(City::class);
     }
 
+    public function posts(): BelongsToMany
+    {
+        return $this->belongsToMany(Post::class);
+    }
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
@@ -104,7 +102,7 @@ class Attraction extends Model
             return $this->title;
         }
     }
-    
+
     public function getMetaDesc(): string
     {
         if ($this->meta_desc) {
@@ -113,6 +111,8 @@ class Attraction extends Model
             return substr($this->short_desc, 0, 150);;
         }
     }
+
+   
 
     public $translatable = ['name', 'slug', 'meta_title', 'meta_desc', 'short_desc', 'desc'];
 }

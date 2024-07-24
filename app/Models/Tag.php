@@ -9,14 +9,13 @@ use Filament\Forms\Components\TextInput;
 use Spatie\Translatable\HasTranslations;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
-
 
 class Tag extends Model
 {
     use HasTranslations;
-
     use HasFactory;
 
     /**

@@ -1,5 +1,9 @@
-
 document.addEventListener("livewire:navigated", () => {
+    if (window.location.pathname.includes("/admin")) {
+        // If the current URL path includes '/admin', skip the rest of the script
+        return;
+    }
+
     if (
         localStorage.getItem("color-theme") === "dark" ||
         (!("color-theme" in localStorage) &&

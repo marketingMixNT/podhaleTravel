@@ -6,40 +6,31 @@
       
             <x-base.heading-third heading="Artykuły "
                 subheading="Przeczytaj artykuły dotyczące atrakcji bla bla bla" />
-   
+ 
 
 
-        {{-- <div class="flex justify-center gap-x-12 max-w-screen-xl mx-auto">
+    <div class="flex flex-col lg:flex-row flex-1 items-start gap-x-12 w-full">
 
-            
-           @foreach ($this->attraction->posts as $post)
+           
+        @foreach ($this->attraction->posts as $post)
                
-           <x-blog.post-card-simple wire:id="{{$attraction->id}}" :post="$post"/>
-           @endforeach
-
-           
-    
-    </div> --}}
-    <div class="flex justify-center items-center gap-x-12 w-full">
-
-           
-
-        <div class="swiper similar-attraction-swiper">
+        <x-blog.post-card-simple wire:key="{{$post->id}}" :post="$post" />
+        @endforeach
+        {{-- <div class="swiper attraction-posts-swiper">
             <div class="swiper-wrapper">
-                @foreach ($this->attraction->posts as $post)
-               
-                <x-blog.post-card-simple wire:id="{{$attraction->id}}" :post="$post" class="swiper-slide"/>
-                @endforeach
+                
 
 
             </div>
             <div class="swiper-pagination"></div>
-        </div>
+        </div> --}}
     </div>
+
+
         
 
         </div>
-        <div class="flex justify-center items-center w-full">
+        <div class="flex justify-center items-center w-full mt-24">
             <a wire:navigate href="" class="link-hover">Zobacz wszystkie</a
         </div>
     </div>

@@ -11,6 +11,8 @@ class AttractionShow extends Component
     public $attraction;
     public $similarAttractions;
 
+    public $shuffledGallery;
+
     public function mount($slug)
     {
         $this->slug = $slug;
@@ -30,6 +32,9 @@ class AttractionShow extends Component
             ->where('id', '!=', $this->attraction->id)
             ->take(5)
             ->get();
+
+            $this->shuffledGallery = $this->attraction->gallery;
+            shuffle($this->shuffledGallery);
     }
    
     public function render()

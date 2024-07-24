@@ -1,14 +1,31 @@
 created:
+    - database/factories/AttractionFactory.php
+    - database/factories/CityFactory.php
+    - database/factories/CategoryFactory.php
+    - database/factories/TagFactory.php
+    - database/factories/SocialFactory.php
     - database/factories/PostFactory.php
-    - database/migrations/2024_07_23_070727_create_posts_table.php
-    - database/migrations/2024_07_23_070728_create_category_post_table.php
-    - database/migrations/2024_07_23_070729_create_attraction_post_table.php
+    - database/migrations/2024_07_24_091325_create_attractions_table.php
+    - database/migrations/2024_07_24_091326_create_cities_table.php
+    - database/migrations/2024_07_24_091327_create_categories_table.php
+    - database/migrations/2024_07_24_091328_create_tags_table.php
+    - database/migrations/2024_07_24_091329_create_socials_table.php
+    - database/migrations/2024_07_24_091330_create_posts_table.php
+    - database/migrations/2024_07_24_091331_create_attraction_category_table.php
+    - database/migrations/2024_07_24_091332_create_attraction_tag_table.php
+    - database/migrations/2024_07_24_091333_create_category_post_table.php
+    - database/migrations/2024_07_24_091334_create_attraction_post_table.php
+    - app/Models/Attraction.php
+    - app/Models/City.php
+    - app/Models/Category.php
+    - app/Models/Tag.php
+    - app/Models/Social.php
     - app/Models/Post.php
 models:
     User: { name: string, email: string, email_verified_at: 'timestamp nullable default:NULL', password: string, remember_token: 'string:100 nullable default:NULL' }
     Attraction: { name: 'json unique', slug: 'json unique', meta_title: 'json nullable', meta_desc: 'json nullable', google_maps_link: 'text nullable', google_maps_frame: 'text nullable', short_desc: json, desc: json, thumbnail: text, gallery: text, address: text, site_link: 'text nullable', phone: 'string nullable', email: 'string nullable', featured: boolean, order: 'integer nullable', relationships: { belongsTo: 'User, City', belongsToMany: 'Category, Tag', hasMany: Social } }
-    City: { name: 'json unique', slug: 'json unique', relationships: { hasMany: Attraction } }
+    City: { name: 'json unique', slug: 'json unique', thumbnail: text, relationships: { hasMany: Attraction } }
     Category: { name: 'json unique', slug: 'json unique', type: string, thumbnail: text, relationships: { belongsToMany: Attraction } }
     Tag: { name: 'json unique', slug: 'json unique', thumbnail: text, relationships: { belongsToMany: Attraction } }
     Social: { name: text, link: text, relationships: { belongsTo: Attraction } }
-    Post: { title: 'json unique', slug: json, thumbnail: text, content: json, published_at: 'datetime nullable', featured: 'boolean nullable', relationships: { belongsToMany: 'Category, Attraction' } }
+    Post: { meta_title: 'json nullable', meta_desc: 'json nullable', title: 'json unique', slug: 'json unique', thumbnail: text, content: 'json unique', published_at: 'datetime nullable', featured: 'boolean nullable', relationships: { belongsToMany: 'Category, Attraction', belongsTo: User } }

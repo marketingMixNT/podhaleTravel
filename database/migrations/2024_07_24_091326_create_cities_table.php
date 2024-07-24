@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('category_post', function (Blueprint $table) {
-            $table->foreignId('category_id');
-            $table->foreignId('post_id');
+        Schema::create('cities', function (Blueprint $table) {
+            $table->id();
+            $table->json('name')->unique();
+            $table->json('slug')->unique();
+            $table->text('thumbnail');
+            $table->timestamps();
         });
     }
 
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('category_post');
+        Schema::dropIfExists('cities');
     }
 };

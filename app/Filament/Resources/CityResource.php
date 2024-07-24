@@ -35,18 +35,28 @@ class CityResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema( City::getForm());
+            ->schema(City::getForm());
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('attractions_count', 'asc')
             ->columns([
+                Tables\Columns\ImageColumn::make('thumbnail')
+                    ->label('Miniaturka'),
+
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nazwa')
                     ->searchable()
                     ->sortable(),
-                    
+
+
+                Tables\Columns\TextColumn::make('attractions_count')
+                    ->label('Liczba Atrakcji')
+                    ->counts('attractions')
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Data publikacji')
                     ->dateTime()

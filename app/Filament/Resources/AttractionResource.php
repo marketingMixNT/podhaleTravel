@@ -224,7 +224,7 @@ class AttractionResource extends Resource
                             ->label('Google Maps iFrame')
                             ->placeholder('wklej tutaj iframe z mapą google')
                             ->autosize()
-                            ->hint('W celu poprawy optymalizacji dodaj tag name="nazwaAtrakcji')
+                            ->hint('Usuń tagi: width="", height="" oraz dodaj tagi: name="nazwaAtrakcji", class="w-full h-full"')
                             ->columnSpanFull(),
                     ]),
 
@@ -239,6 +239,7 @@ class AttractionResource extends Resource
                         Forms\Components\RichEditor::make('short_desc')
                             ->label('Krótki opis')
                             ->required()
+                            ->hint(fn ($state, $component) => 'pozostało: ' . $component->getMaxLength() - strlen($state) . ' znaków') ->maxlength(500) ->live()
                             ->toolbarButtons([
                                 'bold', 'italic',
                             ])
@@ -288,16 +289,19 @@ class AttractionResource extends Resource
                             ->label('Galeria')
                             ->directory('apartments-galleries')
                             ->getUploadedFileNameForStorageUsing(
-                                fn (TemporaryUploadedFile $file): string => 'atrakcja-galeria' . now()->format('Ymd_His') . '.' . $file->getClientOriginalExtension()
+                                fn (TemporaryUploadedFile $file): string => 'atrakcja-galeria-' . now()->format('H-i-s') . '-' . str_replace([' ', '.'], '', microtime()) . '.' . $file->getClientOriginalExtension()
                             )
                             ->multiple()
                             ->appendFiles()
                             ->image()
+                            ->reorderable()
+                            ->hint('Pierwsze 3 zdjęcia pojawią się przy głównym opisie')
                             ->maxSize(8192)
                             ->optimize('webp')
                             ->imageEditor()
                             ->minFiles(3)
                             ->maxFiles(12)
+                            ->panelLayout('grid')
                             ->imageEditorAspectRatios([
                                 null,
                                 '16:9',
@@ -327,6 +331,10 @@ class AttractionResource extends Resource
             ->defaultSort('order', 'asc')
             ->columns([
 
+                Tables\Columns\TextColumn::make('order')
+                    ->label('#')
+                    ->sortable(),
+
                 Tables\Columns\ImageColumn::make('thumbnail')
                     ->label('Miniaturka'),
 
@@ -354,7 +362,11 @@ class AttractionResource extends Resource
                 Tables\Columns\TextColumn::make('city.name')
                     ->label('Miejscowość')
                     ->searchable(),
-
+                    
+                    Tables\Columns\TextColumn::make('posts_count')
+                    ->label('Liczba Postów')
+                    ->counts('posts')
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('user_id')
                     ->label('Autor')

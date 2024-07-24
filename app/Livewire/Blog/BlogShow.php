@@ -14,8 +14,10 @@ class BlogShow extends Component
     public $post;
     public $latestPosts;
 
+    public $shuffledGallery;
 
-    public $description = 'meta postów';
+
+
 
 
     public function mount($slug)
@@ -23,12 +25,14 @@ class BlogShow extends Component
         $this->slug = $slug;
         $this->loadPost();
         $this->latestPosts = $this->getLatestPosts();
+        
     }
 
 
     public function loadPost()
     {
         $this->post = Post::with('categories')->where('slug->pl', $this->slug)->firstOrFail();
+      
     }
 
 
@@ -48,9 +52,10 @@ class BlogShow extends Component
         return view('livewire.blog.blog-show', [
             'post' => $this->post,
             'latestPosts' => $this->latestPosts,
+           
         ])->layout('components.layouts.app', [
-            'title' => $this->post->title,
-            'description' => $this->description
+            'title' => $this->post->getMetaTitle(),
+            'description' => $this->post->getMetaDesc()
         ]);
     }
 }

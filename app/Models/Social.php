@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use Filament\Forms\Components\Component;
 use Livewire\Component as Livewire;
 use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
-
+use Filament\Forms\Components\Component;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

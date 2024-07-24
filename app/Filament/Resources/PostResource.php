@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use App\Models\Post;
 use Filament\Tables;
+use Livewire\Component as Livewire;
 use Filament\Forms\Set;
 use App\Models\Category;
 use Filament\Forms\Form;
@@ -12,10 +13,12 @@ use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Filament\Resources\Resource;
+use Awcodes\Shout\Components\Shout;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Component;
+// use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
@@ -25,6 +28,7 @@ use App\Filament\Resources\PostResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostResource\RelationManagers;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Schmeits\FilamentCharacterCounter\Forms\Components\TextInput;
 
 class PostResource extends Resource
 {
@@ -44,8 +48,45 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
+                // SEO
+                Section::make('SEO')
+                    ->icon('heroicon-o-globe-alt')
+                    ->collapsible()
+                    ->collapsed()
+                    ->description('Wprowadź meta title oraz meta description , które informują użytkowników o treści strony.')
+                    ->schema([
+                        Shout::make('info')
+                            ->content('Tytuł oraz opis zostaną uzupełnione automatycznie jezeli ich nie podasz. Zachecamy jednak do zrobienia tego w celu lepszej optymalizacji')
+                            ->type('info'),
+
+                        TextInput::make('meta_title')
+                            ->label('Tytuł Meta')
+                            ->placeholder('Meta title to tytuł strony internetowej wyświetlany w wynikach wyszukiwarek i na kartach przeglądarki.')
+                            ->characterLimit(60)
+                            ->minLength(10)
+                            ->maxLength(75)
+                            ->live(debounce: 1000)
+                            ->afterStateUpdated(function (Livewire $livewire, Component $component) {
+                                $validate = $livewire->validateOnly($component->getStatePath());
+                            })
+                            ->columnSpanFull(),
+
+                        TextInput::make('meta_desc')
+                            ->label('Opis Meta')
+                            ->placeholder('Meta description to krótki opis strony internetowej wyświetlany w wynikach wyszukiwarek.')
+                            ->characterLimit(160)
+                            ->minLength(10)
+                            ->maxLength(180)
+                            ->live(debounce: 1000)
+                            ->afterStateUpdated(function (Livewire $livewire, Component $component) {
+                                $validate = $livewire->validateOnly($component->getStatePath());
+                            })
+                            ->columnSpanFull(),
+                    ]),
+
                 Section::make('Tytuł oraz treść')
                     ->icon('heroicon-o-pencil')
+                    ->description('Wprowadź tytuł oraz treść posta')
                     ->collapsible()
                     ->collapsed()
                     ->columns(2)
@@ -74,6 +115,7 @@ class PostResource extends Resource
                     ]),
                 Section::make('Miniaturka oraz kategoria')
                     ->icon('heroicon-o-photo')
+                    ->description('Przypisz kategorie oraz atrakcje')
                     ->collapsible()
                     ->collapsed()
                     ->columns(2)
@@ -96,7 +138,7 @@ class PostResource extends Resource
                                 '1:1',
                             ])
                             ->required(),
-                            Forms\Components\Select::make('category_id')
+                        Forms\Components\Select::make('category_id')
                             ->label('Kategoria')
                             ->relationship('categories', 'name', function ($query) {
                                 $query->where('type', 'posts');
@@ -108,7 +150,7 @@ class PostResource extends Resource
                             ->placeholder('Mozesz wybrac kilka'),
 
 
-                            Forms\Components\Select::make('attraction_id')
+                        Forms\Components\Select::make('attraction_id')
                             ->label('Atrakcja')
                             ->relationship('attractions', 'name')
                             ->multiple()
@@ -119,6 +161,7 @@ class PostResource extends Resource
 
                     ]),
                 Section::make('Publikacja')
+                ->description('Wybierdz datę publikacji')
                     ->icon('heroicon-o-clock')
                     ->collapsible()
                     ->collapsed()
@@ -137,40 +180,40 @@ class PostResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-        ->defaultSort('published_at', 'desc')
-        ->columns([
-            Tables\Columns\ImageColumn::make('thumbnail')
-                ->label('Miniaturka'),
-            Tables\Columns\TextColumn::make('title')
-                ->label('Tytuł')
-                ->searchable()
-                ->sortable()
-                ->description(function (Post $record) {
-                    return Str::limit(strip_tags($record->content), 40);
-                }),
+            ->defaultSort('published_at', 'desc')
+            ->columns([
+                Tables\Columns\ImageColumn::make('thumbnail')
+                    ->label('Miniaturka'),
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Tytuł')
+                    ->searchable()
+                    ->sortable()
+                    ->description(function (Post $record) {
+                        return Str::limit(strip_tags($record->content), 40);
+                    }),
 
                 Tables\Columns\TextColumn::make('categories.title')
-                ->label('Kategorie'),
+                    ->label('Kategorie'),
 
-           
-            Tables\Columns\TextColumn::make('published_at')
-                ->label('Data publikacji')
-                ->badge()
-                ->dateTime()
-                ->formatStateUsing(function ($state) {
-                    return Carbon::parse($state)->format('d-m-Y H:i');
-                })
-                ->color(function ($state) {
-                    if ($state <= Carbon::now()) {
-                        return 'success';
-                    } else {
-                        return 'danger';
-                    }
-                })
-                ->sortable(),
-            Tables\Columns\IconColumn::make('featured')
-                ->label('Polecony')
-                ->boolean(),
+
+                Tables\Columns\TextColumn::make('published_at')
+                    ->label('Data publikacji')
+                    ->badge()
+                    ->dateTime()
+                    ->formatStateUsing(function ($state) {
+                        return Carbon::parse($state)->format('d-m-Y H:i');
+                    })
+                    ->color(function ($state) {
+                        if ($state <= Carbon::now()) {
+                            return 'success';
+                        } else {
+                            return 'danger';
+                        }
+                    })
+                    ->sortable(),
+                Tables\Columns\IconColumn::make('featured')
+                    ->label('Polecony')
+                    ->boolean(),
 
 
 
@@ -221,4 +264,3 @@ class PostResource extends Resource
         return ('Post');
     }
 }
-

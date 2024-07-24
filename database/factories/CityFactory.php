@@ -23,6 +23,7 @@ class CityFactory extends Factory
         return [
             'name' => '{}',
             'slug' => '{}',
+            'thumbnail' => $this->faker->text(),
         ];
     }
 }

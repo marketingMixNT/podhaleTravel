@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Filament\Forms\Set;
+use App\Models\Attraction;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Spatie\Translatable\HasTranslations;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class City extends Model
 {
@@ -24,6 +27,7 @@ class City extends Model
     protected $fillable = [
         'name',
         'slug',
+        'thumbnail',
     ];
 
     /**
@@ -33,6 +37,7 @@ class City extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'name' => 'array',
         'slug' => 'array',
     ];
 
@@ -61,6 +66,25 @@ class City extends Model
                 ->minLength(3)
                 ->maxLength(255)
                 ->placeholder('Przyjazny adres url który wygeneruje się automatycznie'),
+
+            FileUpload::make('thumbnail')
+                ->label('Miniaturka')
+                ->directory('city-thumbnails')
+                ->getUploadedFileNameForStorageUsing(
+                    fn (TemporaryUploadedFile $file): string => 'city-thumb' . now()->format('Ymd_His') . '.' . $file->getClientOriginalExtension()
+                )
+                ->image()
+                ->maxSize(8192)
+                ->optimize('webp')
+                ->imageEditor()
+                ->imageEditorAspectRatios([
+                    null,
+                    '16:9',
+                    '4:3',
+                    '1:1',
+                ])
+                ->required(),
+
         ];
     }
 
@@ -71,7 +95,7 @@ class City extends Model
         return $formatName;
     }
 
-    public function getThumbnailUrl() :string
+    public function getThumbnailUrl(): string
     {
         return  asset('storage/' . $this->thumbnail);
     }

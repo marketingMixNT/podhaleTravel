@@ -15,8 +15,8 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class Category extends Model
 {
-    use HasTranslations;
 
+    use HasTranslations;
     use HasFactory;
 
     /**

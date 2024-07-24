@@ -6,11 +6,13 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Post extends Model
 {
+
     use HasTranslations;
 
     use HasFactory;
@@ -21,12 +23,15 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
+        'meta_title',
+        'meta_desc',
         'title',
         'slug',
         'thumbnail',
         'content',
         'published_at',
         'featured',
+        'user_id',
     ];
 
     /**
@@ -36,11 +41,14 @@ class Post extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'meta_title' => 'array',
+        'meta_desc' => 'array',
         'title' => 'array',
         'slug' => 'array',
         'content' => 'array',
         'published_at' => 'datetime',
         'featured' => 'boolean',
+        'user_id' => 'integer',
     ];
 
     public function categories(): BelongsToMany
@@ -51,6 +59,11 @@ class Post extends Model
     public function attractions(): BelongsToMany
     {
         return $this->belongsToMany(Attraction::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function scopePublished($query)
@@ -83,7 +96,24 @@ class Post extends Model
         return ($mins < 1) ? 1 : $mins;
     }
 
+    public function getMetaTitle(): string
+    {
+        if ($this->meta_title) {
+            return $this->meta_title;
+        } else {
+            return $this->title;
+        }
+    }
 
-    public $translatable = ['title', 'slug', 'content', 'desc'];
+    public function getMetaDesc(): string
+    {
+        if ($this->meta_desc) {
+            return $this->meta_desc;
+        } else {
+            return substr($this->content, 0, 150);;
+        }
+    }
 
+
+    public $translatable = ['title', 'slug', 'content', 'desc', 'meta_title', 'meta_desc',];
 }

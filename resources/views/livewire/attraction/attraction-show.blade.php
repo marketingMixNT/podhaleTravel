@@ -2,7 +2,7 @@
     <x-attraction.show.hero :attraction="$attraction" />
     <x-attraction.show.info :attraction="$attraction" />
     <x-attraction.show.description :attraction="$attraction" />
-    <x-attraction.show.gallery :attraction="$attraction" />
+    <x-attraction.show.gallery :attraction="$attraction" :shuffledGallery="$shuffledGallery" />
     <x-attraction.show.posts :attraction="$attraction" />
     <x-attraction.show.contact :attraction="$attraction" />
     <x-attraction.show.similar :similarAttractions="$similarAttractions" />

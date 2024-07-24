@@ -78,11 +78,7 @@ document.addEventListener("livewire:navigated", () => {
        
         modules: [Autoplay, Navigation,]
     });
-});
 
-
-// ATTRACTIONS POSTS
-document.addEventListener("livewire:navigated", () => {
     new Swiper(".attraction-posts-swiper", {
         loop: true,
         slidesPerView: 1,
@@ -94,7 +90,7 @@ document.addEventListener("livewire:navigated", () => {
                 slidesPerView: 2,
             },
             1280: {
-                slidesPerView: 3,
+                slidesPerView: 2,
             }
         },
 
@@ -109,6 +105,13 @@ document.addEventListener("livewire:navigated", () => {
        
         modules: [Autoplay,]
     });
+
+});
+
+
+// ATTRACTIONS POSTS
+document.addEventListener("livewire:navigated", () => {
+  
 });
 
 

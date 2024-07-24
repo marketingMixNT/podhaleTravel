@@ -30,7 +30,7 @@ class CategoryResource extends Resource
     {
         return ['pl', 'en'];
     }
-    
+
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';
@@ -40,21 +40,27 @@ class CategoryResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema( Category::getForm());
+            ->schema(Category::getForm());
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('attractions_count', 'asc')
             ->columns([
                 Tables\Columns\ImageColumn::make('thumbnail')
-                ->label('Miniaturka'),
+                    ->label('Miniaturka'),
 
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nazwa')
                     ->searchable()
                     ->sortable(),
-                    
+
+                Tables\Columns\TextColumn::make('attractions_count')
+                    ->label('Liczba Atrakcji')
+                    ->counts('attractions')
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Data publikacji')
                     ->dateTime()

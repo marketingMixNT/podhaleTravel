@@ -16,9 +16,9 @@ html {
 {
     @apply text-fontDark dark:text-fontLight;
 }
-.prose{
-    max-width: 100% !important;
-}
+// .prose{
+//     max-width: 100% !important;
+// }
 
 .prose h3{
     @apply text-3xl
