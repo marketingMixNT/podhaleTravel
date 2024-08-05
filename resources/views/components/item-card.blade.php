@@ -1,6 +1,7 @@
-@props(['item'])
+@props(['item','link'])
 
-<a wire:navigate href="{{ route('attraction.index', ['category' => $item->slug]) }}"
+{{-- <a wire:navigate href="{{ route('attraction.index', ['category' => $item->slug]) }}" --}}
+<a wire:navigate href="{{ $link }}"
     class=" group relative  bg-center bg-cover bg-blend-multiply bg-gray-300 hover:bg-gray-500 duration-500 h-[400px] md:h-[500px]"
     style="background-image:url('{{ $item->getThumbnailUrl() }}')">
 

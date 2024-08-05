@@ -11,22 +11,22 @@ html {
 .prose p,
 .prose span,
 .prose ul,
-.prose li, 
-.prose strong 
-{
+.prose li,
+.prose strong {
     @apply text-fontDark dark:text-fontLight;
 }
 // .prose{
 //     max-width: 100% !important;
 // }
 
-.prose h3{
-    @apply text-3xl
+.prose h3 {
+    @apply text-3xl;
 }
 
 //CATEGORIES
 .active {
-    @apply bg-bgDark-800 dark:bg-bgDark-400 text-fontLight  border-none hover:bg-bgDark-800 dark:hover:bg-bgDark-600;
+    color: white !important;
+    @apply bg-bgDark-800 dark:bg-bgDark-400 text-fontLight  border-none hover:bg-bgDark-800 dark:hover:bg-bgDark-600 dark:text-fontLight;
 }
 .inactive {
     @apply bg-bgLight-200 border border-fontDark hover:bg-bgLight-400 dark:text-fontDark;

@@ -73,54 +73,38 @@ class AttractionList extends Component
         return City::all();
     }
 
-    // #[Computed]
-    // public function getCategoriesProperty()
-    // {
-    //     return Cache::remember('categories', now()->addMinute(), function () {
-    //         return Category::where('type', 'attractions')->get();
-    //     });
-    // }
+   
 
-    // #[Computed]
-    // public function getTagsProperty()
-    // {
-    //     return Cache::remember('tags', now()->addHours(1), function () {
-    //         return Tag::all();
-    //     });
-    // }
 
-    // #[Computed]
-    // public function getCitiesProperty()
+    // #[Url]
+    // public function setCategory($slug)
     // {
-    //     return Cache::remember('cities', now()->addHours(1), function () {
-    //         return City::all();
-    //     });
+    //     $this->category = $slug;
+    //     $this->resetPage();
+    //     $this->emitSelf('refreshComponent');
     // }
 
 
-    #[Url]
-    public function setCategory($slug)
-    {
-        $this->category = $slug;
-        $this->resetPage();
-        $this->emitSelf('refreshComponent');
-    }
 
+    // #[Url]
+    // public function setTag($slug)
+    // {
+    //     $this->tag = $slug;
+    //     $this->resetPage();
+    //     $this->emitSelf('refreshComponent');
+    // }
+    // #[Url]
+    // public function setCity($slug)
+    // {
+    //     $this->city = $slug;
+    //     $this->resetPage();
+    //     $this->emitSelf('refreshComponent');
+    // }
 
-
-    #[Url]
-    public function setTag($slug)
+    public function getFormatedTitle($model)
     {
-        $this->tag = $slug;
-        $this->resetPage();
-        $this->emitSelf('refreshComponent');
-    }
-    #[Url]
-    public function setCity($slug)
-    {
-        $this->city = $slug;
-        $this->resetPage();
-        $this->emitSelf('refreshComponent');
+        $title = str_replace('-', ' ', $model);
+        return ucwords($title);
     }
     
 

@@ -77,6 +77,8 @@ class Post extends Model
             $q->where('slug', $slug);
         });
     }
+
+  
     public function getExcerpt()
     {
         return  str_replace(['"', "'"], '', substr(html_entity_decode(strip_tags($this->content)), 0, 300));

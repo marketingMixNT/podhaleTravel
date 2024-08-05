@@ -14,7 +14,7 @@
 
     </div>
     <div class="flex justify-center items-center w-full mt-24">
-        <x-base.link-btn href="">Zobacz wszystkie</x-base.link-btn>
+        <x-base.link-btn href="{{$allPostsLink}}">Zobacz wszystkie</x-base.link-btn>
 
     </div>
 

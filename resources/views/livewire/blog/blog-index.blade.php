@@ -1,13 +1,12 @@
 <x-base.main>
 
-    <x-base.heading-secondary heading="Blog"
-        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam, illo." />
+    <x-base.heading-secondary heading="Blog" />
 
 
 
-        <livewire:blog.components.post-list />
+    <livewire:blog.components.post-list />
 
-    
+
 
 
 

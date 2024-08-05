@@ -3,7 +3,7 @@
     <x-show.info :item="$this->attraction" />
     <x-show.description :item="$this->attraction" />
     <x-show.gallery :item="$this->attraction" :gallery="$this->shuffledGallery" />
-    <x-show.posts :item="$this->attraction" />
+    <x-show.posts :item="$this->attraction" allPostsLink="{{ route('blog.index', ['attraction' => $attraction->slug]) }}" />
     <x-show.contact :item="$this->attraction" />
 
     <x-show.similar>

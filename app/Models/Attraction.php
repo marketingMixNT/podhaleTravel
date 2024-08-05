@@ -89,6 +89,13 @@ class Attraction extends Model
         return $this->hasMany(Social::class);
     }
 
+    public function getFormatName()
+    {
+        $formatName = strtolower($this->name);
+        $formatName = ucfirst($formatName);
+        return $formatName;
+    }
+
     public function getThumbnailUrl(): string
     {
         return  asset('storage/' . $this->thumbnail);
