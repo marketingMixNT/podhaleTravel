@@ -24,6 +24,6 @@
 {{-- og --}}
 <meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $description }}">
-<meta property="og:url" content="https://www.gameend.pl">
+<meta property="og:url" content="https://www.atrakcjepodhala.pl">
 <meta property="og:type" content="website">
 <meta property="og:image" content="">

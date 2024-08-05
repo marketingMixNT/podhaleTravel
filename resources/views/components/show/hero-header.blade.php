@@ -1,10 +1,11 @@
 @props(['item'])
 
-<header class="relative w-full h-[calc(100vh-117px)] bg-blend-multiply bg-fixed bg-no-repeat bg-cover bg-center  bg-gray-400  text-center"
+<header
+    class="relative w-full h-[calc(100vh-117px)] bg-blend-multiply bg-fixed bg-no-repeat bg-cover bg-center  bg-gray-400  text-center"
     style="background-image: url({{ asset($item->getThumbnailUrl()) }})">
 
     <h1
-        class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-5xl xs:text-7xl md:text-8xl 2xl:text-9xl font-bold text-fontLight">
+        class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-5xl xs:text-7xl md:text-8xl 2xl:text-9xl font-bold text-fontLight dark:text-fontLight">
         {{ $item->name }}</h1>
 
     {{-- categories --}}

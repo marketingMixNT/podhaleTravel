@@ -21,7 +21,7 @@ class AttractionShow extends Component
 
     public function loadAttraction()
     {
-        $this->attraction = Attraction::with(['categories', 'posts' => function($query) {
+        $this->attraction = Attraction::with(['categories', 'posts' => function ($query) {
             $query->orderBy('published_at', 'desc')->take(3);
         }])->where('slug->pl', $this->slug)->firstOrFail();
 
@@ -33,16 +33,13 @@ class AttractionShow extends Component
             ->take(5)
             ->get();
 
-            $this->shuffledGallery = $this->attraction->gallery;
-            shuffle($this->shuffledGallery);
+        $this->shuffledGallery = $this->attraction->gallery;
+        shuffle($this->shuffledGallery);
     }
-   
+
     public function render()
     {
-        return view('livewire.attraction.attraction-show', [
-            'attraction' => $this->attraction,
-            'similarAttractions' => $this->similarAttractions,
-        ])->layout('components.layouts.app', [
+        return view('livewire.attraction.attraction-show',)->layout('components.layouts.app', [
             'title' => $this->attraction->getMetaTitle(),
             'description' => $this->attraction->getMetaDesc()
         ]);;

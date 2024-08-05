@@ -9,7 +9,7 @@
     <div class="swiper attraction-gallery-swiper">
         <div class="py-20  swiper-wrapper">
 
-            @foreach ($shuffledGallery as $img)
+            @foreach ($gallery as $img)
                 <a data-fslightbox href="{{ asset('storage/' . $img) }}" class=" swiper-slide">
                     <img src="{{ asset('storage/' . $img) }}" alt="zdjęcie przedstawiające {{ $item->name }}"
                         class=" h-full w-full  aspect-square max-w-[500px] object-cover">

@@ -3,8 +3,7 @@
     <div class="flex flex-col gap-8 lg:gap-16 ">
 
 
-        <x-base.heading-third heading="Kontakt"
-            subheading="Dane adresowe itd. bla bla bla" />
+        <x-base.heading-third heading="Kontakt" subheading="Dane adresowe itd. bla bla bla" />
 
         <div class="flex flex-col lg:flex-row justify-center items-center">
 
@@ -39,13 +38,13 @@
                 <div class="flex flex-col justify-start items-start gap-2 ">
                     <h2 class="font-bold">Strona internetowa</h2>
                     <div class="flex justify-start items-center gap-2 ml-2">
-                        
+
                         <a href="{{ $attraction->site_link }}" class="link-hover">{{ $attraction->site_link }}</a>
                     </div>
-                   
+
                 </div>
 
-               
+
 
 
             </div>

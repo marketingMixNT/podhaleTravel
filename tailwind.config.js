@@ -22,6 +22,20 @@ export default {
                     400: "#ba0d2f",
                     600: "#a13137",
                 },
+
+                light: {
+                    200: "#ffffff",
+                    400: "#fafafa",
+                    600: "#9ca3af",
+                    800: "#4b556",
+                },
+                dark: {
+                    200: "#9ca3af",
+                    400: "#333",
+                    600: "#1f1f1f",
+                    800: "#000000",
+                },
+
                 fontDark: "#333333",
                 fontLight: "#ffffff",
 

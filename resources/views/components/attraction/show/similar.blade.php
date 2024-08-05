@@ -6,15 +6,13 @@
 
         <div class="flex flex-col lg:flex-row  items-start gap-12  w-full">
 
-            @foreach ($similarAttractions as $attraction)
-            <x-attraction.card-simple wire:key="{{$attraction->id}}" :attraction="$attraction" class="flex-1" />
-        @endforeach
+            {{ $slot }}
 
         </div>
 
     </div>
 
-   
+
 
 
 </x-base.section>

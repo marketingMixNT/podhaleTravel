@@ -79,7 +79,7 @@ class Post extends Model
     }
     public function getExcerpt()
     {
-        return Str::limit(strip_tags($this->content), 300);
+        return  str_replace(['"', "'"], '', substr(html_entity_decode(strip_tags($this->content)), 0, 300));
     }
     public function getThumbnailUrl()
     {
@@ -101,7 +101,7 @@ class Post extends Model
         if ($this->meta_title) {
             return $this->meta_title;
         } else {
-            return $this->title;
+            return str_replace(['"', "'"], '', $this->title);
         }
     }
 
@@ -110,7 +110,7 @@ class Post extends Model
         if ($this->meta_desc) {
             return $this->meta_desc;
         } else {
-            return substr($this->content, 0, 150);;
+            return str_replace(['"', "'"], '', substr(strip_tags($this->content), 0, 150));
         }
     }
 

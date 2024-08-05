@@ -13,22 +13,22 @@
     @include('partials.fonts')
 
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
-    
+
 </head>
 
 <body
     class="relative bg-bgLight-400 dark:bg-bgDark-800 font-text font-light text-fontDark dark:text-fontLight overflow-x-hidden">
 
-    <x-shared.header />
+    <x-shared.navbar />
 
     {{ $slot }}
 
     <x-shared.footer />
 
-    
-  
 
-   
+
+
+
 </body>
 
 </html>

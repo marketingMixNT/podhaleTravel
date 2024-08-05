@@ -1,13 +1,18 @@
 <main>
-    <x-attraction.show.hero :attraction="$attraction" />
-    <x-attraction.show.info :attraction="$attraction" />
-    <x-attraction.show.description :attraction="$attraction" />
-    <x-attraction.show.gallery :attraction="$attraction" :shuffledGallery="$shuffledGallery" />
-    <x-attraction.show.posts :attraction="$attraction" />
-    <x-attraction.show.contact :attraction="$attraction" />
-    <x-attraction.show.similar :similarAttractions="$similarAttractions" />
+    <x-show.hero-header :item="$this->attraction" />
+    <x-show.info :item="$this->attraction" />
+    <x-show.description :item="$this->attraction" />
+    <x-show.gallery :item="$this->attraction" :gallery="$this->shuffledGallery" />
+    <x-show.posts :item="$this->attraction" />
+    <x-show.contact :item="$this->attraction" />
 
-    <x-base.section class="bg-black">
+    <x-show.similar>
+        @foreach ($this->similarAttractions as $attraction)
+            <x-attraction.card-simple wire:key="{{ $attraction->id }}" :attraction="$attraction" class="flex-1" />
+        @endforeach
+    </x-show.similar>
+
+    {{-- <x-base.section class="bg-black">
         tutaj pasuje coś opisać ze podhale jest wspaniałe i ze zachecamy do odwiedzania tego wspaniałego regionu
-    </x-base.section>
+    </x-base.section> --}}
 </main>

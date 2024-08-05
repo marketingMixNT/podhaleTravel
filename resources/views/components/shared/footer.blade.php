@@ -1,4 +1,4 @@
-<footer class="px-6 md:px-16 pt-20 pb-10">
+<footer class="px-6 md:px-16 pt-10 pb-10">
     {{-- container --}}
     <div class="max-w-screen-xl mx-auto space-y-11">
         {{-- TOP --}}
