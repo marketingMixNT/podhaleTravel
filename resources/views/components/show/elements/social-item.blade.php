@@ -1,5 +1,5 @@
 <div class="flex justify-center items-center gap-2 ml-2">
-    @foreach ($item->socials as $social)
+    @foreach ($socials as $social)
         @if ($social->name == 'facebook')
             <a href="{{$social->link}}" target="_blank">
                 <x-iconpark-facebook-o class="w-6 scale-hover" />

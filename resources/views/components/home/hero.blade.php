@@ -1,4 +1,4 @@
-<div class="grid lg:grid-cols-2 ">
+<header class="grid lg:grid-cols-2 ">
     {{-- text --}}
     <div class="flex  flex-col justify-center items-start px-6 md:px-20 gap-10 h-full py-16 lg:py-0 ">
 
@@ -16,9 +16,9 @@
         <div class="absolute right-5 bottom-5 flex flex-col xs:flex-row gap-6">
             {{-- LOOP --}}
             @foreach ($this->categories->take(3) as $category)
-                <x-base.badge wire::key="{{$category->id}}"
+                <x-base.badge wire::key="{{ $category->id }}"
                     href="{{ route('attraction.index', ['category' => $category->slug]) }}">{{ $category->getFormatName() }}</x-base.badge>
             @endforeach
         </div>
     </div>
-</div>
+</header>

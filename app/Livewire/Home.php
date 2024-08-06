@@ -10,8 +10,8 @@ use Livewire\Attributes\Computed;
 
 class Home extends Component
 {
-    public $title = 'Strona Główna';
-    public $description = 'meta desc strona główna';
+    public $title = 'Atrakcje Podhala - Najlepsze Miejsca, Restauracje i Noclegi';
+    public $description = 'Odkryj najpiękniejsze atrakcje Podhala! Sprawdź najlepsze restauracje, noclegi i miejsca do zwiedzania w sercu Tatr.';
 
     #[Computed(persist: true, seconds: 7200)]
     public function getCategoriesProperty()
@@ -27,7 +27,7 @@ class Home extends Component
     public function getPostsProperty()
     {
         return Post::published()
-            ->with('categories') // Eager loading categories
+            ->with('categories')
             ->orderBy('published_at', 'desc')
             ->take(4)
             ->get();
@@ -36,7 +36,7 @@ class Home extends Component
     #[Computed(persist: true, seconds: 7200)]
     public function getAttractionsProperty()
     {
-        return Attraction::with(['city', 'categories']) // Eager loading city and categories
+        return Attraction::with(['city', 'categories'])
             ->orderBy('order', 'asc')
             ->take(4)
             ->get();
@@ -50,4 +50,3 @@ class Home extends Component
         ]);
     }
 }
-

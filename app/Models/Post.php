@@ -30,6 +30,7 @@ class Post extends Model
         'thumbnail',
         'content',
         'published_at',
+        'published_end',
         'featured',
         'user_id',
     ];
@@ -47,6 +48,7 @@ class Post extends Model
         'slug' => 'array',
         'content' => 'array',
         'published_at' => 'datetime',
+        'published_end' => 'datetime',
         'featured' => 'boolean',
         'user_id' => 'integer',
     ];
@@ -68,7 +70,16 @@ class Post extends Model
 
     public function scopePublished($query)
     {
-        $query->where('published_at', '<=', Carbon::now());
+        $query->where('published_at', '<=', Carbon::now())
+              ->where(function($query) {
+                  $query->where('published_end', '>=', Carbon::now())
+                        ->orWhereNull('published_end');
+              });
+    }
+
+    public function scopeArchive($query)
+    {
+        $query->where('published_end', '<=', Carbon::now());
     }
 
     public function scopeWithCategory($query, $slug)
@@ -78,10 +89,10 @@ class Post extends Model
         });
     }
 
-  
+
     public function getExcerpt()
     {
-        return  str_replace(['"', "'"], '', substr(html_entity_decode(strip_tags($this->content)), 0, 300));
+        return  str_replace(['"', "'"], '', substr(html_entity_decode(strip_tags($this->content)), 0, 300)) . '...';
     }
     public function getThumbnailUrl()
     {

@@ -1,9 +1,9 @@
-@props(['item','link'])
+@props(['item', 'link', 'class' => ''])
 
 {{-- <a wire:navigate href="{{ route('attraction.index', ['category' => $item->slug]) }}" --}}
 <a wire:navigate href="{{ $link }}"
-    class=" group relative  bg-center bg-cover bg-blend-multiply bg-gray-300 hover:bg-gray-500 duration-500 h-[400px] md:h-[500px]"
-    style="background-image:url('{{ $item->getThumbnailUrl() }}')">
+    class=" group relative  bg-center bg-cover bg-blend-multiply bg-gray-300 hover:bg-gray-500 duration-500  {{$class}} "
+    style="background-image:url('{{ $item->getThumbnailUrl() }}'); }">
 
     <div class="absolute bottom-6 px-6 left-0 right-0 flex justify-between items-center">
         <div class="flex flex-col gap-1">

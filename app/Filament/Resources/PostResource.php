@@ -161,17 +161,25 @@ class PostResource extends Resource
 
                     ]),
                 Section::make('Publikacja')
-                ->description('Wybierdz datę publikacji')
+                    ->description('Wybierdz datę publikacji')
                     ->icon('heroicon-o-clock')
                     ->collapsible()
                     ->collapsed()
                     ->columns(3)
                     ->schema([
+
                         DateTimePicker::make('published_at')
                             ->label('Data publikacji')
                             ->columns(1)
                             ->default(now())
                             ->required(),
+
+                        DateTimePicker::make('published_end')
+                            ->label('Zakończenie publikacji')
+                            ->columns(1)
+                            ->default(now()->addMonth())
+                            ->required(),
+
                         Toggle::make('featured')->label('Polecany')->columnSpanFull()->onIcon('heroicon-o-star'),
                     ]),
             ]);
@@ -211,6 +219,23 @@ class PostResource extends Resource
                         }
                     })
                     ->sortable(),
+
+                Tables\Columns\TextColumn::make('published_end')
+                    ->label('Data zakończenia')
+                    ->badge()
+                    ->dateTime()
+                    ->formatStateUsing(function ($state) {
+                        return Carbon::parse($state)->format('d-m-Y H:i');
+                    })
+                    ->color(function ($state) {
+                        if ($state >= Carbon::now()) {
+                            return 'success';
+                        } else {
+                            return 'danger';
+                        }
+                    })
+                    ->sortable(),
+
                 Tables\Columns\IconColumn::make('featured')
                     ->label('Polecony')
                     ->boolean(),

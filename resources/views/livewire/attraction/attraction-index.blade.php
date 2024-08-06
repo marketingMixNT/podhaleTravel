@@ -1,9 +1,10 @@
 <x-base.main>
-    <x-base.heading-secondary heading="Atrakcje"
-       />
+    <x-base.heading-secondary heading="Atrakcje" />
 
-   
-        <livewire:attraction.components.attraction-list />
-   
+
+    <livewire:attraction.components.attraction-list />
+
+    <x-shared.podhale />
+
 
 </x-base.main>

@@ -1,4 +1,4 @@
-<x-base.section class="bg-bgLight-200">
+<x-base.section >
 
     <x-base.heading subheading="Atrakcje" heading="Polecane atrakcje" />
 

@@ -31,8 +31,7 @@
             {{-- SOCIALS --}}
             @if ($item->socials)
                 <div class="flex flex-col justify-start items-start gap-2 ">
-                    <h2 class="font-bold">Social Media</h2>
-                    <x-attraction.show.socials :attraction="$item" />
+                    <x-show.elements.socials :socials="$item->socials" />
                 </div>
             @endif
             {{-- SITE LINK --}}

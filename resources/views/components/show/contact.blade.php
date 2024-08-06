@@ -14,7 +14,7 @@
 
                 <x-show.elements.address :item="$item" />
                 <x-show.elements.phone-mail :item="$item" />
-                <x-show.elements.socials :item="$item" />
+                <x-show.elements.socials :socials="$item->socials" />
                 <x-show.elements.site-link :item="$item" />
 
             </div>

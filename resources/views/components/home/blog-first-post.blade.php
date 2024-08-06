@@ -13,12 +13,16 @@
     {{-- categories & reading time --}}
     <div class="flex justify-start items-center gap-5">
 
-        @foreach ($post->categories as $category)
+        @foreach ($post->categories->take(3) as $category)
             <x-base.badge wire:key='{{$category->id}}' class="mr-4" 
                 href="{{ route('attraction.index', ['category' => $category->slug]) }}">{{ $category->getFormatName() }}</x-base.badge>
         @endforeach
 
-        <span class="text-sm">{{ $post->getReadingTime() }} min</span>
+        <div class="flex justify-start items-center gap-2">
+
+            <x-heroicon-o-book-open class="w-5" />
+            <span class="text-sm">{{ $post->getReadingTime() }} min</span>
+        </div>
 
     </div>
     {{-- title & excerpt --}}
