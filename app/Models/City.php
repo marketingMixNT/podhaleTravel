@@ -91,7 +91,7 @@ class City extends Model
     public function getFormatName()
     {
         $formatName = strtolower($this->name);
-        $formatName = ucfirst($formatName);
+        $formatName = ucwords($formatName);
         return $formatName;
     }
 

@@ -1,7 +1,7 @@
 <x-base.section class="bg-bgLight-200 dark:bg-dark-600">
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-16 lg:gap-y-0">
-        <div class="flex flex-col justify-center gap-12 items-start lg:w-3/4">
+        <div class="flex flex-col justify-center gap-12 items-start lg:w-3/4 order-1 lg:order-none">
             <h2 class="text-4xl sm:text-5xl font-medium" style="line-height: 1.2">Odkryj Urok Podhala
             </h2>
             <div class="space-y-4">

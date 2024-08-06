@@ -5,7 +5,7 @@
 
 
     <button data-dropdown-toggle="{{ $id }}"
-        class="duration-500 hover:shadow-xl px-6 py-2  inline-flex items-center rounded-full {{ $class }}"
+        class="duration-500 hover:shadow-xl px-6 py-2  inline-flex items-center rounded-full  {{ $class }}"
         type="button">{{ $title }}<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" aria-label="Wybierz tag"
             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

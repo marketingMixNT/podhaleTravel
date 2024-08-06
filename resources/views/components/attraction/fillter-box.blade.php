@@ -1,4 +1,7 @@
+
+
 <x-filters.container clearRoute="{{ route('attraction.index') }}">
+
 
     {{-- LEFT SIDE --}}
     <div class="flex flex-col xs:flex-row justify-center items-center gap-6 flex-wrap">
@@ -50,7 +53,7 @@
 
 
     {{-- RIGHT SIDE --}}
-    <x-filters.search-box clearRoute="{{ route('blog.index') }}" />
+    <x-filters.search-box clearRoute="{{ route('attraction.index') }}" />
 
 
 </x-filters.container>

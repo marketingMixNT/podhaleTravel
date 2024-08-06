@@ -1,6 +1,13 @@
 <x-base.main>
 
-    <x-about.hero-header />
+    <x-base.header type="hero" img="{{ asset('assets/img/podhale6.webp') }}">
+        <x-base.heading as="h1" size="xl">Miejsce, które zachwyca o każdej porze roku</x-base.heading>
+
+
+        
+    </x-base.header>
+
+    {{-- <x-about.hero-header /> --}}
 
     <x-about.text-image-block title="Kraina Gór" img="{{ asset('assets/img/podhale2.webp') }}">Podhale to region, który
         zachwyca nie tylko malowniczymi krajobrazami,
