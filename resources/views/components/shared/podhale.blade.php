@@ -16,7 +16,7 @@
                
              
             </div>
-            <x-base.link-btn type="wider" href="#">Dowiedz się więcej</x-base.link-btn>
+            <x-base.link-btn type="wider" href="{{ route('about.index') }}">Dowiedz się więcej</x-base.link-btn>
         </div>
         <div class="w-full h-full overflow-hidden">
             <img src="{{ asset('assets/img/podhale.webp') }}" alt="piękny widok na Tatry" loading="lazy"
